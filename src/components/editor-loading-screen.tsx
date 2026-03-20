@@ -22,8 +22,8 @@ export default function EditorLoadingScreen() {
   return (
     <div className="flex flex-col justify-center items-center h-screen gap-3">
       <img
-        src="/slidee-colored-icon.png"
-        alt="Slidee"
+        src="/slidesurf-colored-icon.svg"
+        alt="Slidesurf"
         className="mb-4"
         width={50}
         height={50}

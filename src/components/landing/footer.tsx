@@ -15,10 +15,6 @@ export default function Footer() {
           <Link className="text-sm text-muted-foreground hover:text-foreground transition-colors" to="/offer">
             {t("offer")}
           </Link>
-          <span className="hidden sm:inline text-muted-foreground">•</span>
-          <Link className="text-sm text-muted-foreground hover:text-foreground transition-colors" to="/pricing">
-            {t("prices")}
-          </Link>
         </div>
         <span className="text-xs sm:text-sm text-muted-foreground text-center">
           © {new Date().getFullYear()} {t("name")}

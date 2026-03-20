@@ -11,7 +11,6 @@ import EditorWithIdPage from "@/pages/EditorWithIdPage";
 import EditorPreviewPage from "@/pages/EditorPreviewPage";
 import ExportPage from "@/pages/ExportPage";
 import PresentPage from "@/pages/PresentPage";
-import PricingPage from "@/pages/PricingPage";
 import OfferPage from "@/pages/OfferPage";
 import PrivacyPage from "@/pages/PrivacyPage";
 import SharedPage from "@/pages/SharedPage";
@@ -33,7 +32,6 @@ export const router = createBrowserRouter([
     children: [
       // Public pages
       { path: "/", element: <LandingPage /> },
-      { path: "/pricing", element: <PricingPage /> },
       { path: "/privacy", element: <PrivacyPage /> },
       { path: "/offer", element: <OfferPage /> },
 

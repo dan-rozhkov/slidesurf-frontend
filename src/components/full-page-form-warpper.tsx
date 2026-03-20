@@ -18,10 +18,10 @@ export default function FullPageFormWrapper({
           <img
             src={
               theme === "dark"
-                ? "/slidee-logo-invert.png"
-                : "/slidee-colored-logo.png"
+                ? "/slidesurf-colored-logo-invert.svg"
+                : "/slidesurf-colored-logo.svg"
             }
-            alt="Slidee"
+            alt="Slidesurf"
             width={140}
             height={48}
             className="object-contain"

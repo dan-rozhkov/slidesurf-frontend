@@ -37,13 +37,13 @@ export function MainNavSidebar() {
           <img
             src={
               mounted && theme === "dark"
-                ? "/slidee-logo-invert.png"
-                : "/slidee-colored-logo.png"
+                ? "/slidesurf-colored-logo-invert.svg"
+                : "/slidesurf-colored-logo.svg"
             }
             className="object-contain"
-            alt="Logo"
-            width={140}
-            height={48}
+            alt="Slidesurf"
+            width={196}
+            height={68}
           />
         </div>
 

@@ -1,6 +1,6 @@
 export default {
   landing: {
-    name: "Slidee",
+    name: "Slidesurf",
     about: "About",
     pricing: "Pricing",
     contact: "Contact",
@@ -8,7 +8,7 @@ export default {
     titlePart1: "Create presentations",
     titlePart2: "with ease",
     description:
-      "Get a ready-made presentation in just a few seconds. The AI will analyze your topic, create a unique design for each slide, and generate appropriate images.",
+      "Get a ready-made presentation in just a few seconds. The AI will analyze your topic, create a unique design for each slide, and generate suitable images.",
     createPresentation: "Create presentation",
     createPresentationForFree: "Create presentation for free",
     watchVideo: "Watch video",
@@ -53,7 +53,7 @@ export default {
           badge: "Plus",
           features: [
             "Everything in Free, and:",
-            "Remove Slidee branding",
+            "Remove Slidesurf branding",
             "Create up to 20 cards per prompt",
           ],
           buttonText: "Get started",
@@ -532,7 +532,7 @@ export default {
     searchIcons: "Search icons",
   },
   chat: {
-    title: "Slidee AI",
+    title: "Slidesurf AI",
     placeholder: "Write what you want to do...",
     send: "Send",
     slide: "Slide",
