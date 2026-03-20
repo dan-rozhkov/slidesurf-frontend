@@ -94,6 +94,7 @@ export const EditImageForm = ({
 
       const response = await fetch("/api/generate/image/prompt", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slideContent: currentSlide.content }),
       });
 

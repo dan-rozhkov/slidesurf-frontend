@@ -60,6 +60,7 @@ const Editor = ({
   const [presentationAtom, setPresentationAtom] = usePresentationAtom();
   const [isPresenting, setIsPresenting] = useIsPresentingAtom();
   const hasGeneratedRef = useRef(false);
+  const isGeneratingRef = useRef(false);
   const [isChatOpen, setIsChatOpen] = useChatOpenAtom();
   const { theme } = useTheme(presentationAtom?.themeId || null);
   const debouncedUpdatePresentation = useDebouncedCallback(
@@ -75,23 +76,29 @@ const Editor = ({
 
   const handleGenerateSlides = useCallback(async () => {
     if (presentationData.slidesPlan) {
-      const newPresentation = await generateSlides({
-        prompt: presentationData.slidesPlan[0].title,
-        slidesCount: presentationData.slidesPlan.length,
-        slidesPlan: presentationData.slidesPlan,
-        attachments: presentationData.attachments || [],
-        contentSettings: presentationData.contentSettings ?? undefined,
-      });
-
-      if (newPresentation) {
-        await createPresentation({
-          ...newPresentation,
-          planId: presentationData.planId,
+      isGeneratingRef.current = true;
+      debouncedUpdatePresentation.cancel();
+      try {
+        const newPresentation = await generateSlides({
+          prompt: presentationData.slidesPlan[0].title,
+          slidesCount: presentationData.slidesPlan.length,
+          slidesPlan: presentationData.slidesPlan,
+          attachments: presentationData.attachments || [],
+          contentSettings: presentationData.contentSettings ?? undefined,
         });
-        window.history.pushState(null, "", `/editor/${newPresentation.id}`);
+
+        if (newPresentation) {
+          await createPresentation({
+            ...newPresentation,
+            planId: presentationData.planId,
+          });
+          window.history.pushState(null, "", `/editor/${newPresentation.id}`);
+        }
+      } finally {
+        isGeneratingRef.current = false;
       }
     }
-  }, [generateSlides, presentationData]);
+  }, [generateSlides, presentationData, debouncedUpdatePresentation]);
 
   useEffect(() => {
     // If no presentation, create a new presentation with default slide
@@ -135,7 +142,7 @@ const Editor = ({
 
   // Update presentation when it's not presenting or generating slides
   useEffect(() => {
-    if (presentationAtom && !isPresenting) {
+    if (presentationAtom && !isPresenting && !isGeneratingRef.current) {
       debouncedUpdatePresentation(presentationAtom.id, {
         slides: presentationAtom.slides,
       });

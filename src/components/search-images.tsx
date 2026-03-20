@@ -57,6 +57,7 @@ export const SearchImages = ({
     try {
       const response = await fetch(`/api/search/${data.provider}`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: data.query }),
       });
 

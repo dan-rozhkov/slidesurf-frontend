@@ -66,6 +66,7 @@ export const useSlidesGeneration = () => {
       try {
         const response = await fetch("/api/generate/slides", {
           method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             prompt,
             slidesCount,
@@ -161,6 +162,7 @@ export const useSlidesGeneration = () => {
               // Get image prompt
               const promptResponse = await fetch("/api/generate/image/prompt", {
                 method: "POST",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                   slideContent: slide.content,
                 }),

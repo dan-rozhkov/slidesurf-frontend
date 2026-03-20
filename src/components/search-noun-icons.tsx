@@ -55,6 +55,7 @@ export const SearchNounIcons = ({
     try {
       const response = await fetch(`/api/search/nounproject`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: data.query }),
       });
 
@@ -74,6 +75,7 @@ export const SearchNounIcons = ({
     try {
       const response = await fetch(`/api/search/nounproject/download`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           iconId,
           color: iconColor,

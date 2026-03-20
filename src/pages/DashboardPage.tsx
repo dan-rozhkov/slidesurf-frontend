@@ -1,7 +1,6 @@
 import DashboardActions from "@/components/dashboard-actions";
 import PresentationsList from "@/components/presentations-list";
 import { useScopedI18n } from "@/lib/locales/client";
-import { AdsBanner } from "@/components/ads-banner";
 
 export default function DashboardPage() {
   const t = useScopedI18n("dashboard");
@@ -14,13 +13,6 @@ export default function DashboardPage() {
           <DashboardActions />
         </div>
       </div>
-
-      <AdsBanner
-        promoCode="BLACKFRIDAY"
-        title="Скидка 50% на все подписки"
-        description="Доступ к премиум моделям для генерации текста и картинок в презентации"
-        buttonText="Купить со скидкой"
-      />
 
       <PresentationsList />
     </div>

@@ -14,6 +14,7 @@ import { Button } from "./ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useRef, useCallback } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   createPresentation,
   deletePresentation,
@@ -88,11 +89,18 @@ export default function PresentationThumb({
   presentation: Presentation;
 }) {
   const t = useScopedI18n("presentationThumb");
+  const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [openRenameDialog, setOpenRenameDialog] = useState(false);
   const [isImageLoading, setIsImageLoading] = useState(true);
   const isDeleted = presentation?.isDeleted;
   const navigate = useNavigate();
+
+  const invalidatePresentations = () => {
+    queryClient.invalidateQueries({ queryKey: ["presentations"] });
+    queryClient.invalidateQueries({ queryKey: ["deleted-presentations"] });
+    queryClient.invalidateQueries({ queryKey: ["shared-presentations"] });
+  };
 
   const thumbnailUrl = `${import.meta.env.VITE_AWS_ENDPOINT}/${import.meta.env.VITE_AWS_BUCKET_NAME}/${presentation.id}/preview.png`;
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -118,7 +126,7 @@ export default function PresentationThumb({
   const handleThumbnailClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    navigate(`editor/${presentation.id}`);
+    navigate(`/editor/${presentation.id}`);
   };
 
   const handleMoreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -152,7 +160,7 @@ export default function PresentationThumb({
             alt={presentation.title}
             className={cn(
               "w-full h-full object-cover transition-opacity duration-200",
-              isImageLoading ? "opacity-0" : "opacity-100"
+              isImageLoading ? "opacity-0" : "opacity-100",
             )}
             width={380}
             height={214}
@@ -203,13 +211,14 @@ export default function PresentationThumb({
                     </PopoverAction>
 
                     <PopoverAction
-                      onClick={() => {
+                      onClick={async () => {
                         setOpen(false);
-                        createPresentation({
+                        await createPresentation({
                           title: `${presentation.title} (копия)`,
                           themeId: presentation.themeId,
                           slides: presentation.slides,
                         });
+                        invalidatePresentations();
                       }}
                     >
                       <Copy className="size-4" strokeWidth={1.5} />
@@ -217,9 +226,10 @@ export default function PresentationThumb({
                     </PopoverAction>
 
                     <PopoverAction
-                      onClick={() => {
+                      onClick={async () => {
                         setOpen(false);
-                        toTrash(presentation.id);
+                        await toTrash(presentation.id);
+                        invalidatePresentations();
                       }}
                     >
                       <Trash className="size-4" strokeWidth={1.5} />
@@ -231,9 +241,10 @@ export default function PresentationThumb({
                 {isDeleted && (
                   <>
                     <PopoverAction
-                      onClick={() => {
+                      onClick={async () => {
                         setOpen(false);
-                        restorePresentation(presentation.id);
+                        await restorePresentation(presentation.id);
+                        invalidatePresentations();
                       }}
                     >
                       <ArchiveRestore className="size-4" strokeWidth={1.5} />
@@ -241,9 +252,10 @@ export default function PresentationThumb({
                     </PopoverAction>
 
                     <PopoverAction
-                      onClick={() => {
+                      onClick={async () => {
                         setOpen(false);
-                        deletePresentation(presentation.id);
+                        await deletePresentation(presentation.id);
+                        invalidatePresentations();
                       }}
                     >
                       <Trash className="size-4" strokeWidth={1.5} />
@@ -265,9 +277,10 @@ export default function PresentationThumb({
 
           <RenamePresentationForm
             presentation={presentation}
-            onSubmit={(title) => {
+            onSubmit={async (title) => {
               setOpenRenameDialog(false);
-              updatePresentation(presentation.id, { title }, true);
+              await updatePresentation(presentation.id, { title }, true);
+              invalidatePresentations();
             }}
           />
         </DialogContent>

@@ -16,7 +16,11 @@ function flatten(
   for (const key in obj) {
     const fullKey = prefix ? `${prefix}.${key}` : key;
     const value = obj[key];
-    if (typeof value === "object" && value !== null && !Array.isArray(value)) {
+    if (Array.isArray(value)) {
+      value.forEach((item, index) => {
+        result[`${fullKey}.${index}`] = String(item);
+      });
+    } else if (typeof value === "object" && value !== null) {
       Object.assign(result, flatten(value as Record<string, unknown>, fullKey));
     } else {
       result[fullKey] = String(value);
