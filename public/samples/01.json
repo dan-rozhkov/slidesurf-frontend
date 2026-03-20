@@ -1,0 +1,88 @@
+{
+  "id": "bjqeown3euldxf4ybu42j",
+  "title": "Без названия",
+  "slides": [
+    {
+      "id": "1whr1nr5o8xar4t5l5p4p",
+      "layout": "right-image",
+      "verticalAlign": "center",
+      "content": "<h1 style=\"text-align: center\">Влияние деятельности человека на климат</h1>",
+      "index": 0,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/rabbit/iyxYLI_0nwEPrz1ZoUtjH.png"
+    },
+    {
+      "id": "fytgxjjnqbizq28jlr1d3",
+      "content": "<h1>Основные признаки</h1><div data-type=\"columns\"><div data-type=\"column\"><div data-type=\"card\" data-accent=\"true\"><p style=\"text-align: left\"><span style=\"font-size: 3em\"><strong>1</strong></span></p><p style=\"text-align: left\">Увеличение концентрации парниковых газов в атмосфере, в основном из-за сжигания ископаемого топлива.</p></div></div><div data-type=\"column\"><div data-type=\"card\" data-accent=\"false\"><p style=\"text-align: left\"><span style=\"font-size: 3em\"><strong>2</strong></span></p><p style=\"text-align: left\">Ускорение процессов эрозии и изменения ландшафта из-за интенсивной сельскохозяйственной деятельности и строительства.</p></div></div><div data-type=\"column\"><div data-type=\"card\" data-accent=\"false\"><p style=\"text-align: left\"><span style=\"font-size: 3em\"><strong>3</strong></span></p><p style=\"text-align: left\">Сокращение площади лесов и утрата биоразнообразия из-за вырубки лесов и расширения городских зон.</p></div></div></div>",
+      "verticalAlign": "center",
+      "layout": "without"
+    },
+    {
+      "id": "ay54jyjunroi07b1gw8u2",
+      "layout": "right-image",
+      "verticalAlign": "center",
+      "content": "<h1>Основные факторы</h1>\n<ul>\n    <li>Промышленность — ключевой источник выбросов парниковых газов.</li>\n    <li>Транспорт — ключевой источник выбросов парниковых газов.</li>\n    <li>Сельское хозяйство — ключевой источник выбросов парниковых газов.</li>\n    <li>Энергетика — ключевой источник выбросов парниковых газов.</li>\n</ul>",
+      "index": 1,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/lion/n8QcQMRfXXxPhDwdVe9OL.png"
+    },
+    {
+      "id": "fvhf4ds5kudjvu9mc4qsv",
+      "layout": "left-image",
+      "verticalAlign": "center",
+      "content": "<h1>Парниковые газы</h1><p>Углекислый газ, метан и оксид азота — основные парниковые газы, задерживающие тепло и повышающие глобальную температуру. Углекислый газ играет в этом процессе ведущую роль.</p>",
+      "index": 2,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/rabbit/RC5IfjfeGnbXk2RHx3qJJ.png"
+    },
+    {
+      "id": "cvcyrw73mk5vpfj66dbla",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<h1>Последствия воздействия человека</h1><ul><li><p style=\"text-align: left\">Повышение температуры воздуха</p></li><li><p style=\"text-align: left\">Изменение количества осадков</p></li><li><p style=\"text-align: left\">Ускоренное таяние ледников</p></li><li><p style=\"text-align: left\">Повышение уровня мирового океана</p></li></ul>",
+      "index": 3,
+      "isLoadingLayoutImage": true
+    },
+    {
+      "id": "bca1upx7qih2cseqta0sz",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<h1>Социальные и экономические последствия</h1>\n<div style=\"display: flex; flex-direction: column; align-items: flex-start;\">\n    <div style=\"width: 100%;\">\n        <h2>Продовольственная безопасность</h2>\n        <p>Изменение климата угрожает продовольственной безопасности, снижая урожайность сельскохозяйственных культур.</p>\n    </div>\n    <div style=\"width: 100%;\">\n        <h2>Здоровье</h2>\n        <p>Изменение климата увеличивает заболеваемость и смертность из-за экстремальных погодных условий и инфекционных заболеваний.</p>\n    </div>\n    <div style=\"width: 100%;\">\n        <h2>Экономическое развитие</h2>\n        <p>Экономическое развитие замедляется из-за затрат на восстановление после климатических катастроф и снижения производительности труда.</p>\n    </div>\n</div>",
+      "index": 4,
+      "isLoadingLayoutImage": true
+    },
+    {
+      "id": "q2d4mew6wradkxvdhfgsl",
+      "layout": "left-image",
+      "verticalAlign": "center",
+      "content": "<h1>Меры по смягчению последствий</h1>\n<ul>\n<li>Снижение выбросов парниковых газов</li>\n<li>Переход на возобновляемые источники энергии</li>\n<li>Повышение энергоэффективности</li>\n<li>Снижение зависимости от ископаемых топлив</li>\n<li>Уменьшение негативного воздействия на окружающую среду</li>\n</ul>",
+      "index": 5,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/koala/kVt42vYocpTHWBw9IK-tn.png"
+    },
+    {
+      "id": "ec5nddsrt7bj7h73minr2",
+      "layout": "right-image",
+      "verticalAlign": "center",
+      "content": "<h1>Три ключевых действия</h1><div data-type='columns'><div data-type='column'><div data-type='card'><p><span style='font-size: 3em;'><strong>1</strong></span></p><p>Сокращение использования ископаемого топлива</p></div></div><div data-type='column'><div data-type='card'><p><span style='font-size: 3em;'><strong>2</strong></span></p><p>Развитие зеленых технологий</p></div></div><div data-type='column'><div data-type='card'><p><span style='font-size: 3em;'><strong>3</strong></span></p><p>Увеличение лесных насаждений</p></div></div></div>",
+      "index": 6,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/kangaroo/SW5z5EahP-chZmWjfC_Xo.png"
+    },
+    {
+      "id": "qrdczhozicrfgegbz941l",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<h1>Заключение</h1><p>Человечество должно принять меры для снижения негативного влияния на климат и защиты планеты для будущих поколений.</p>",
+      "index": 7,
+      "isLoadingLayoutImage": true
+    },
+    {
+      "id": "jvby7zhn1o0hj7uhyrxw0",
+      "content": "<h1 style=\"text-align: center\"><span><strong>Спасибо за внимание!</strong></span></h1>",
+      "verticalAlign": "center",
+      "layout": "without"
+    }
+  ],
+  "themeId": "pearl"
+}

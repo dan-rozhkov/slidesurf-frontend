@@ -1,0 +1,58 @@
+{
+  "id": "bjqeown3euldxf4ybu42j",
+  "title": "Без названия",
+  "slides": [
+    {
+      "id": "mommv5b5edromizno160d",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<h1>Уход за цветами в квартире</h1><p>Правильный уход за комнатными растениями обеспечивает их здоровье и красоту.</p>",
+      "index": 0,
+      "isLoadingLayoutImage": true
+    },
+    {
+      "id": "iwse0nv7sf74pf11ykdf3",
+      "layout": "top-image",
+      "verticalAlign": "center",
+      "content": "<h1>Выбор растений</h1><p>При выборе растений учитывайте условия вашего жилья: освещение, влажность и температуру.</p>",
+      "index": 1,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/lion/QMcm2cQvFIPgB2XSRE87J.png"
+    },
+    {
+      "id": "6hr1634ve0lo2p8sd0bs8",
+      "layout": "left-image",
+      "verticalAlign": "center",
+      "content": "<h1>Полив</h1><p>Поливайте растения в зависимости от их потребностей. Избегайте переувлажнения и пересыхания почвы.</p>",
+      "index": 2,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/zebra/W22EGGuNhkGHJmxFiE_mD.png"
+    },
+    {
+      "id": "61p9bbl03y99dagg3efo5",
+      "layout": "right-image",
+      "verticalAlign": "center",
+      "content": "<h1>Удобрение</h1><p>Регулярно подкармливайте растения удобрениями, особенно в период активного роста.</p>",
+      "index": 3,
+      "isLoadingLayoutImage": true,
+      "layoutImageUrl": "https://v3.fal.media/files/lion/ISpItTe1Bttn3tDWGCpuc.png"
+    },
+    {
+      "id": "flnemy2ulo90utzc5pzr9",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<ul>\n<li>Обеспечьте растениям достаточное количество света, но избегайте прямых солнечных лучей для тенелюбивых видов.</li>\n<li>Для растений, предпочитающих полутень, выберите места возле окон с восточной или западной стороны.</li>\n<li>Растениям, требующим яркого, но рассеянного света, подойдут окна с северной стороны.</li>\n<li>Используйте дополнительное искусственное освещение для растений, которые нуждаются в длительном световом дне.</li>\n</ul>",
+      "index": 4,
+      "isLoadingLayoutImage": true
+    },
+    {
+      "id": "5n8jz3q0pij6rrn1lofkq",
+      "layout": "without",
+      "verticalAlign": "center",
+      "content": "<h1>Советы по уходу</h1>\n<div data-type=\"columns\">\n    <div data-type=\"column\">\n        <div data-type=\"card\" data-accent=\"true\">\n            <p style=\"text-align: center\"><span style=\"font-size: 3em\"><strong>1</strong></span></p>\n            <p style=\"text-align: center\">Регулярно проверяйте состояние растений и своевременно корректируйте уход.</p>\n        </div>\n    </div>\n    <div data-type=\"column\">\n        <div data-type=\"card\" data-accent=\"false\">\n            <p style=\"text-align: center\"><span style=\"font-size: 3em\"><strong>2</strong></span></p>\n            <p style=\"text-align: center\">Удаляйте засохшие и поврежденные листья и цветы для поддержания здоровья растения.</p>\n        </div>\n    </div>\n    <div data-type=\"column\">\n        <div data-type=\"card\" data-accent=\"false\">\n            <p style=\"text-align: center\"><span style=\"font-size: 3em\"><strong>3</strong></span></p>\n            <p style=\"text-align: center\">Пересаживайте растения в более крупные горшки по мере их роста.</p>\n        </div>\n    </div>\n    <div data-type=\"column\">\n        <div data-type=\"card\" data-accent=\"false\">\n            <p style=\"text-align: center\"><span style=\"font-size: 3em\"><strong>4</strong></span></p>\n            <p style=\"text-align: center\">Поливайте растения в соответствии с их потребностями и типом почвы.</p>\n        </div>\n    </div>\n</div>",
+      "index": 5,
+      "isLoadingLayoutImage": true
+    }
+  ],
+  "themeId": "pearl"
+}

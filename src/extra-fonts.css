@@ -1,0 +1,23 @@
+@font-face {
+  font-family: "MTSText";
+  src: url("https://static.tildacdn.com/tild6565-3636-4636-a165-643235643566/MTSText-Regular.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MTSText";
+  src: url("https://static.tildacdn.com/tild6233-3566-4931-a661-643737313432/MTSText-Medium.woff")
+    format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MTSWide";
+  src: url("https://static.tildacdn.com/tild3230-3539-4531-b234-633762336130/MTSWide-Bold.woff")
+    format("woff");
+  font-weight: bold;
+  font-style: normal;
+}

@@ -1,0 +1,50 @@
+export const DEFAULT_THEME_COLORS = {
+  backgroundColor: "#FFFFFF",
+  foregroundColor: "#000000",
+  accentColor: "#047CFE",
+
+  cardBackgroundColor: "#F4F4F4",
+  cardForegroundColor: "#333333",
+  cardBorderColor: "#E5E5E5",
+
+  tableBorderColor: "#E5E5E5",
+  tableRowBackground: "#FFFFFF",
+  tableHeaderBackground: "#F4F4F4",
+
+  smartLayoutItem1: "#047CFE",
+  smartLayoutItem2: "#0066CC",
+  smartLayoutItem3: "#4DA6FF",
+  smartLayoutItem4: "#80BFFF",
+  smartLayoutStatFill: "#047CFE",
+  smartLayoutStatEmpty: "#E6F3FF",
+  smartLayoutBorderColor: "#E5E5E5",
+
+  chartColor1: "#047CFE",
+  chartColor2: "#0066CC",
+  chartColor3: "#4DA6FF",
+  chartColor4: "#80BFFF",
+  chartColor5: "#B3D9FF",
+};
+
+export const POPULAR_GOOGLE_FONTS: Array<{ label: string; value: string }> = [
+  { label: "Inter", value: "Inter" },
+  { label: "Roboto", value: "Roboto" },
+  { label: "Open Sans", value: "Open Sans" },
+  { label: "Montserrat", value: "Montserrat" },
+  { label: "Manrope", value: "Manrope" },
+  { label: "Noto Sans", value: "Noto Sans" },
+  { label: "Noto Serif", value: "Noto Serif" },
+  { label: "Merriweather", value: "Merriweather" },
+  { label: "PT Sans", value: "PT Sans" },
+  { label: "PT Serif", value: "PT Serif" },
+  { label: "Ubuntu", value: "Ubuntu" },
+  { label: "Fira Sans", value: "Fira Sans" },
+  { label: "Exo 2", value: "Exo 2" },
+  { label: "Rubik", value: "Rubik" },
+  { label: "IBM Plex Sans", value: "IBM Plex Sans" },
+  { label: "IBM Plex Serif", value: "IBM Plex Serif" },
+  { label: "Comfortaa", value: "Comfortaa" },
+  { label: "Arimo", value: "Arimo" },
+  { label: "Playfair Display", value: "Playfair Display" },
+  { label: "JetBrains Mono", value: "JetBrains Mono" },
+];
