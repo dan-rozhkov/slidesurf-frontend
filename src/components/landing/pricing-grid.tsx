@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { useScopedI18n } from "@/lib/locales/client";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type ButtonAction =
   | {
@@ -35,6 +36,7 @@ const PricingGrid = ({
   className = "",
   plans: customPlans,
 }: PricingGridProps) => {
+  if (!isSubscriptionEnabled()) return null;
   const t = useScopedI18n("landing.pricingPlans");
 
   const plusPrice = Number(import.meta.env.VITE_PLUS_PRICE);

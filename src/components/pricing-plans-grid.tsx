@@ -1,6 +1,7 @@
 
 import PricingCard from "@/components/settings/pricing-card";
 import { useScopedI18n } from "@/lib/locales/client";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type PromoCodeData = {
   id: string;
@@ -32,6 +33,7 @@ export function PricingPlansGrid({
   promoCodeSlot,
   promoCodePricing,
 }: PricingPlansGridProps) {
+  if (!isSubscriptionEnabled()) return null;
   const tLanding = useScopedI18n("landing.pricingPlans");
   const tSettings = useScopedI18n("settings");
 

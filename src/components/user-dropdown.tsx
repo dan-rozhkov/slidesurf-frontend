@@ -12,6 +12,7 @@ import { useScopedI18n } from "@/lib/locales/client";
 import { revalidate } from "@/api/subscription";
 import { useUserSubscription } from "@/lib/hooks/use-user-subscription";
 import { UserAvatar } from "@/components/user-avatar";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 function UserDropdownSkeleton() {
   return (
@@ -67,7 +68,7 @@ export function UserDropdown() {
             <span className="text-sm font-bold truncate w-full">
               {session?.user?.name || session?.user?.email}
             </span>
-            {subscription && (
+            {isSubscriptionEnabled() && subscription && (
               <span className="text-xs text-neutral-500 inline-flex py-0.5 px-2 bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-100 rounded-sm">
                 {subscription.planType === "free"
                   ? t("subscription.free")

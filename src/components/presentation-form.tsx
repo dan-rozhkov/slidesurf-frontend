@@ -21,6 +21,7 @@ import { AVAILABLE_MODELS } from "@/lib/models";
 import { Badge } from "@/components/ui/badge";
 import type { ActiveSubscription } from "@/types";
 import { SUBSCRIPTION_LIMITS } from "@/lib/subscription-limits";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type FormData = {
   title: string;
@@ -114,6 +115,7 @@ export function PresentationForm({
   };
 
   const getSlideCountBadge = (slideCount: number) => {
+    if (!isSubscriptionEnabled()) return null;
     if (!subscription) return null;
     // No badge for Auto mode
     if (slideCount === -1) return null;
@@ -139,6 +141,7 @@ export function PresentationForm({
   };
 
   const getModelBadge = (modelId: string) => {
+    if (!isSubscriptionEnabled()) return null;
     if (!subscription) return null;
 
     const model = AVAILABLE_MODELS.find((model) => model.id === modelId);

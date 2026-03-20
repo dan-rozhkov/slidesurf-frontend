@@ -15,6 +15,7 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { PricingPlansGrid } from "@/components/pricing-plans-grid";
 import { PromoCodeInput } from "@/components/promo-code-input";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type PlanPricing = {
   plus: { originalPrice: number; discountAmount: number; finalPrice: number };
@@ -23,6 +24,8 @@ type PlanPricing = {
 
 export function SubscriptionDialog() {
   const [isOpen, setIsOpen] = useSubscriptionDialog();
+
+  if (!isSubscriptionEnabled()) return null;
   const t = useScopedI18n("subscription");
   const [promoCodeInfo, setPromoCodeInfo] = useState<{
     id: string;

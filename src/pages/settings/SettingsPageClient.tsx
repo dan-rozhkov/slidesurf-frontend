@@ -36,6 +36,7 @@ import {
 import CreateApiKeyForm from "@/components/settings/create-api-key-form";
 import SubscriptionStatus from "@/components/settings/subscription-status";
 import { UserAvatar } from "@/components/user-avatar";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 const formSchema = z.object({
   name: z.string().min(1),
@@ -82,10 +83,10 @@ export default function SettingsPageClient() {
 
   useEffect(() => {
     const tabParam = searchParams.get("tab");
-    if (
-      tabParam &&
-      ["account", "subscription", "api-keys"].includes(tabParam)
-    ) {
+    const validTabs = isSubscriptionEnabled()
+      ? ["account", "subscription", "api-keys"]
+      : ["account", "api-keys"];
+    if (tabParam && validTabs.includes(tabParam)) {
       setActiveTab(tabParam);
     }
   }, [searchParams]);
@@ -111,7 +112,9 @@ export default function SettingsPageClient() {
     <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
       <TabsList>
         <TabsTrigger value="account">{t("account")}</TabsTrigger>
-        <TabsTrigger value="subscription">{t("subscription")}</TabsTrigger>
+        {isSubscriptionEnabled() && (
+          <TabsTrigger value="subscription">{t("subscription")}</TabsTrigger>
+        )}
         <TabsTrigger value="api-keys">{t("apiKeys")}</TabsTrigger>
       </TabsList>
       <TabsContent value="account">

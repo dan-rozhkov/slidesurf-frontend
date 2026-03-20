@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getGenerationsUsage } from "@/api/subscription";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 export type GenerationsUsage = {
   used: number;
@@ -15,6 +16,10 @@ export function useGenerationsUsage(options?: UseGenerationsUsageOptions) {
   return useQuery<GenerationsUsage | null>({
     queryKey: ["generations-usage"],
     queryFn: async () => {
+      if (!isSubscriptionEnabled()) {
+        return null;
+      }
+
       const result = await getGenerationsUsage();
       return result || null;
     },

@@ -9,6 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useUserSubscription } from "@/lib/hooks/use-user-subscription";
 import { PricingPlansGrid } from "@/components/pricing-plans-grid";
 import { PromoCodeInput } from "@/components/promo-code-input";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type PlanPricing = {
   plus: { originalPrice: number; discountAmount: number; finalPrice: number };
@@ -45,6 +46,7 @@ type SubscriptionStatusProps = {
 export default function SubscriptionStatus({
   initialPromoCode,
 }: SubscriptionStatusProps) {
+  if (!isSubscriptionEnabled()) return null;
   const t = useScopedI18n("settings");
   const tLanding = useScopedI18n("landing.pricingPlans");
   const [promoCodeInfo, setPromoCodeInfo] = useState<{

@@ -6,6 +6,7 @@ import { useScopedI18n } from "@/lib/locales/client";
 import { Loader, Tag, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { apiFetch } from "@/api/client";
+import { isSubscriptionEnabled } from "@/lib/subscription-utils";
 
 type PlanPricing = {
   plus: { originalPrice: number; discountAmount: number; finalPrice: number };
@@ -31,6 +32,7 @@ export function PromoCodeInput({
   className,
   initialCode,
 }: PromoCodeInputProps) {
+  if (!isSubscriptionEnabled()) return null;
   const t = useScopedI18n("promoCode");
   const [code, setCode] = useState(initialCode?.toUpperCase() || "");
   const [isValidating, setIsValidating] = useState(false);
