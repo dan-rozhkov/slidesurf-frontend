@@ -129,6 +129,7 @@ export default function PresentPage() {
 
   return (
     <div className="fixed inset-0 bg-black flex items-center justify-center">
+      <ThemeInit />
       <div
         id="wrapper"
         className="w-full h-full flex items-center justify-center pointer-events-none"
