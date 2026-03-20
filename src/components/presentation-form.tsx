@@ -17,7 +17,7 @@ import { UseFormReturn, Controller } from "react-hook-form";
 import { useRef, useCallback } from "react";
 import { toast } from "sonner";
 import { useScopedI18n } from "@/lib/locales/client";
-import { AVAILABLE_MODELS } from "@/lib/models";
+import { useModels } from "@/lib/hooks/use-models";
 import { Badge } from "@/components/ui/badge";
 import type { ActiveSubscription } from "@/types";
 import { SUBSCRIPTION_LIMITS } from "@/lib/subscription-limits";
@@ -70,6 +70,7 @@ export function PresentationForm({
   subscription,
 }: PresentationFormProps) {
   const t = useScopedI18n("generate");
+  const { textModels } = useModels();
 
   const attachmentInputRef = useRef<HTMLInputElement>(null);
 
@@ -111,7 +112,7 @@ export function PresentationForm({
   const useResearch = form.watch("useResearch");
 
   const getModelDisplayName = (modelId: string) => {
-    return AVAILABLE_MODELS.find((model) => model.id === modelId)?.name;
+    return textModels.find((model) => model.id === modelId)?.name;
   };
 
   const getSlideCountBadge = (slideCount: number) => {
@@ -144,7 +145,7 @@ export function PresentationForm({
     if (!isSubscriptionEnabled()) return null;
     if (!subscription) return null;
 
-    const model = AVAILABLE_MODELS.find((model) => model.id === modelId);
+    const model = textModels.find((model) => model.id === modelId);
     if (!model?.advanced) return null;
 
     const currentPlan = subscription.planType;
@@ -340,7 +341,7 @@ export function PresentationForm({
               </SelectTrigger>
 
               <SelectContent>
-                {AVAILABLE_MODELS.map((modelOption) => {
+                {textModels.map((modelOption) => {
                   const badge = getModelBadge(modelOption.id);
 
                   return (

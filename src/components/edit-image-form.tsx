@@ -17,13 +17,9 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Slide } from "@/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useScopedI18n } from "@/lib/locales/client";
-import {
-  AVAILABLE_IMAGE_MODELS,
-  DEFAULT_IMAGE_MODEL,
-  getModelById,
-} from "@/lib/models";
+import { useModels } from "@/lib/hooks/use-models";
 import { useUserSubscription } from "@/lib/hooks/use-user-subscription";
 import { useSubscriptionDialog } from "@/lib/hooks/use-subscription-dialog";
 
@@ -64,15 +60,22 @@ export const EditImageForm = ({
   const t = useScopedI18n("editor");
   const { data: subscription } = useUserSubscription();
   const [, setSubscriptionDialogOpen] = useSubscriptionDialog();
+  const { imageModels } = useModels();
 
   const [isGeneratingPrompt, setIsGeneratingPrompt] = useState(false);
-  const [selectedModel, setSelectedModel] = useState(DEFAULT_IMAGE_MODEL);
+  const [selectedModel, setSelectedModel] = useState("");
+
+  useEffect(() => {
+    if (imageModels.length > 0 && !selectedModel) {
+      setSelectedModel(imageModels[0].id);
+    }
+  }, [imageModels, selectedModel]);
 
   const canUseAdvancedImageModels =
     subscription?.limits?.canUseAdvancedImageModels || false;
 
   const handleModelChange = (modelId: string) => {
-    const model = getModelById(modelId);
+    const model = imageModels.find((m) => m.id === modelId);
 
     // Check if model is advanced and user doesn't have access
     if (model?.advanced && !canUseAdvancedImageModels) {
@@ -147,12 +150,12 @@ export const EditImageForm = ({
           <Select value={selectedModel} onValueChange={handleModelChange}>
             <SelectTrigger>
               <SelectValue>
-                {AVAILABLE_IMAGE_MODELS.find((m) => m.id === selectedModel)
+                {imageModels.find((m) => m.id === selectedModel)
                   ?.name || "Select model"}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {AVAILABLE_IMAGE_MODELS.map((model) => (
+              {imageModels.map((model) => (
                 <SelectItem key={model.id} value={model.id}>
                   <div className="flex items-center gap-2">
                     <span>

@@ -19,19 +19,19 @@ export default function SignInPage() {
   if (isPending) return null;
   if (session) return <Navigate to="/dashboard" replace />;
 
-  const signInWithYandex = async () => {
-    await authClient.signIn.oauth2({
-      providerId: "yandex",
-      callbackURL: `${window.location.origin}/dashboard`,
-    });
-  };
+  // const signInWithYandex = async () => {
+  //   await authClient.signIn.oauth2({
+  //     providerId: "yandex",
+  //     callbackURL: `${window.location.origin}/dashboard`,
+  //   });
+  // };
 
-  const signInWithGoogle = async () => {
-    await authClient.signIn.social({
-      provider: "google",
-      callbackURL: `${window.location.origin}/dashboard`,
-    });
-  };
+  // const signInWithGoogle = async () => {
+  //   await authClient.signIn.social({
+  //     provider: "google",
+  //     callbackURL: `${window.location.origin}/dashboard`,
+  //   });
+  // };
 
   const signIn = async () => {
     await authClient.signIn.email(
@@ -52,7 +52,7 @@ export default function SignInPage() {
 
   return (
     <FullPageFormWrapper>
-      <div className="w-full pb-5 space-y-2">
+      {/* <div className="w-full pb-5 space-y-2">
         <Button
           variant="outline"
           onClick={signInWithYandex}
@@ -82,7 +82,7 @@ export default function SignInPage() {
           />
           {t("signIn.signInWithGoogle")}
         </Button>
-      </div>
+      </div> */}
 
       <div className="space-y-2">
         <Input

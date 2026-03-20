@@ -533,7 +533,7 @@ export default {
     searchIcons: "Найти иконку",
   },
   chat: {
-    title: "Slidesurf AI",
+    title: "SlideSurf AI Agent",
     placeholder: "Напишите, что хотите сделать...",
     send: "Отправить",
     slide: "Слайд",
@@ -542,7 +542,7 @@ export default {
     copy: "Скопировать",
     clear: "Очистить чат",
     beta: "Бета",
-    welcomeUser: "Привет, {name}!",
+    welcomeUser: "Привет, {{name}}!",
     welcomeFallback: "друг",
     noMessagesYet: "Нет сообщений",
     startConversation: "Чем могу помочь?",

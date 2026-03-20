@@ -22,8 +22,8 @@ export default function FullPageFormWrapper({
                 : "/slidesurf-colored-logo.svg"
             }
             alt="Slidesurf"
-            width={140}
-            height={48}
+            width={196}
+            height={68}
             className="object-contain"
           />
           <p className="text-sm text-foreground/80">{t("signIn.subtitle")}</p>

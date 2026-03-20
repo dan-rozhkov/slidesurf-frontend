@@ -14,7 +14,7 @@ import { useScopedI18n } from "@/lib/locales/client";
 import { usePresentationData } from "@/lib/hooks/use-presentation-data";
 import { useThemes } from "@/lib/hooks/use-themes";
 import { parseSectionBlock } from "@/lib/client/parsers/section-parser";
-import { DEFAULT_MODEL } from "@/lib/models";
+import { useModels } from "@/lib/hooks/use-models";
 import { useSubscriptionDialog } from "@/lib/hooks/use-subscription-dialog";
 
 import { arrayMove } from "@dnd-kit/sortable";
@@ -70,6 +70,7 @@ const parseSourcesFromResearch = (
 };
 
 export function usePresentationGeneration(locale: string) {
+  const { textModels } = useModels();
   const [presentation, setPresentation] = usePresentationAtom();
   const [sections, setSections] = useState<Section[]>([]);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -92,13 +93,19 @@ export function usePresentationGeneration(locale: string) {
       title: "",
       slidesCount: -1, // Auto by default
       lang: locale === "ru" ? "ru" : "en",
-      model: DEFAULT_MODEL,
+      model: textModels[0]?.id ?? "",
       tone: "neutral",
       whom: "all",
       contentStyle: "less",
       useResearch: false,
     },
   });
+
+  useEffect(() => {
+    if (textModels.length > 0 && !form.getValues("model")) {
+      form.setValue("model", textModels[0].id);
+    }
+  }, [textModels, form]);
 
   useEffect(() => {
     setPresentation({
