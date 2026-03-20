@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { apiFetch } from "@/api/client";
 import { useScopedI18n } from "@/lib/locales/client";
 import { toast } from "sonner";
 import { format } from "date-fns";
@@ -77,7 +78,7 @@ export default function SubscriptionStatus({
           }
         : null;
 
-      const response = await fetch("/api/subscription/process", {
+      const response = await apiFetch("/api/subscription/process", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,3 +1,4 @@
+import { apiFetch } from "@/api/client";
 import { usePresentationAtom } from "@/lib/hooks/use-presentation";
 import {
   Slide,
@@ -160,7 +161,7 @@ export const useSlideActions = () => {
     formData.append("file", file);
     formData.append("presentationId", presentationAtom.id);
 
-    const response = await fetch("/api/upload", {
+    const response = await apiFetch("/api/upload", {
       method: "POST",
       body: formData,
     });

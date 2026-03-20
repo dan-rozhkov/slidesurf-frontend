@@ -1,4 +1,5 @@
 
+import { apiFetch } from "@/api/client";
 import { SlidePlaceholder as SlidePlaceholderType } from "@/types";
 import { Textarea } from "@/components/ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
@@ -65,7 +66,7 @@ export const SlidePlaceholder = forwardRef<
   }, [ref]);
 
   const handleGenerateSlide = async () => {
-    const response = await fetch("/api/generate/slide", {
+    const response = await apiFetch("/api/generate/slide", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

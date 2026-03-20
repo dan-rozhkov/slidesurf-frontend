@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { useScopedI18n } from "@/lib/locales/client";
 import { Loader, Tag, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { apiFetch } from "@/api/client";
 
 type PlanPricing = {
   plus: { originalPrice: number; discountAmount: number; finalPrice: number };
@@ -54,7 +55,7 @@ export function PromoCodeInput({
       try {
         // Validate for both plans
         const [plusResponse, proResponse] = await Promise.all([
-          fetch("/api/promo-code/validate", {
+          apiFetch("/api/promo-code/validate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -62,7 +63,7 @@ export function PromoCodeInput({
               planType: "plus",
             }),
           }),
-          fetch("/api/promo-code/validate", {
+          apiFetch("/api/promo-code/validate", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

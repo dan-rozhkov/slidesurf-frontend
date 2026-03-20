@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { apiFetch } from "@/api/client";
 import { Frown, Meh, Smile, Laugh } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useScopedI18n } from "@/lib/locales/client";
@@ -47,7 +48,7 @@ export function FeedbackRatingCard({
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/feedback/rating", {
+      const response = await apiFetch("/api/feedback/rating", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

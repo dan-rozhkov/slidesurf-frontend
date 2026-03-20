@@ -1,4 +1,5 @@
 
+import { apiFetch } from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { SimpleTiptapEditor } from "@/components/ui/simple-tiptap-editor";
 import {
@@ -77,7 +78,7 @@ export function PresentationForm({
       formData.append("file", file);
 
       try {
-        const response = await fetch("/api/attachment/add", {
+        const response = await apiFetch("/api/attachment/add", {
           method: "POST",
           body: formData,
         });

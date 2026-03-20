@@ -1,5 +1,6 @@
 
 import { useEffect, useState } from "react";
+import { apiFetch } from "@/api/client";
 import { Editor } from "@tiptap/core";
 import { Button } from "@/components/ui/button";
 import {
@@ -46,7 +47,7 @@ const FloatingMenu = ({
 
   const handleCustomPrompt = async (prompt: string, selectedText: string) => {
     try {
-      const response = await fetch("/api/generate/selected-text", {
+      const response = await apiFetch("/api/generate/selected-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -81,7 +82,7 @@ const FloatingMenu = ({
     if (!selectedText) return;
 
     try {
-      const response = await fetch("/api/generate/selected-text", {
+      const response = await apiFetch("/api/generate/selected-text", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

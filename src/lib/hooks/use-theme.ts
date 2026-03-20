@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { apiFetch } from "@/api/client";
 import type { Theme } from "@/types";
 
 type UseThemeReturn = {
@@ -9,7 +10,7 @@ type UseThemeReturn = {
 };
 
 const fetchTheme = async (themeId: string): Promise<Theme> => {
-  const response = await fetch(`/api/themes/${themeId}`);
+  const response = await apiFetch(`/api/themes/${themeId}`);
   if (!response.ok) {
     throw new Error("Failed to fetch theme");
   }

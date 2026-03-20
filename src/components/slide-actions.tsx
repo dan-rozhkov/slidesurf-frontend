@@ -1,5 +1,6 @@
 
 import { Trash2, Shuffle, Loader, Copy } from "lucide-react";
+import { apiFetch } from "@/api/client";
 import { Button } from "./ui/button";
 import SlideSettingsPopover from "./slide-settings-popover";
 import SlideAIPopover from "./slide-ai-popover";
@@ -73,7 +74,7 @@ export default function SlideActions({ slide }: { slide: Slide }) {
     setIsShuffleLoading(true);
 
     try {
-      const response = await fetch("/api/generate/suffle", {
+      const response = await apiFetch("/api/generate/suffle", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slideContent: slide.content }),

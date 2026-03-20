@@ -1,3 +1,4 @@
+import { apiFetch } from "@/api/client";
 import { useIsPresentingAtom } from "./use-is-presenting";
 import { useImageGeneration } from "./use-image-generation";
 import { usePresentationAtom } from "./use-presentation";
@@ -64,7 +65,7 @@ export const useSlidesGeneration = () => {
         });
 
       try {
-        const response = await fetch("/api/generate/slides", {
+        const response = await apiFetch("/api/generate/slides", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -160,7 +161,7 @@ export const useSlidesGeneration = () => {
           slidesWithLayouts.map(async (slide) => {
             try {
               // Get image prompt
-              const promptResponse = await fetch("/api/generate/image/prompt", {
+              const promptResponse = await apiFetch("/api/generate/image/prompt", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({

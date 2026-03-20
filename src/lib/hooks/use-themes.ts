@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiFetch } from "@/api/client";
 import type { Theme } from "@/types";
 
 type UseThemesReturn = {
@@ -20,7 +21,7 @@ type UseThemesReturn = {
 };
 
 const fetchThemes = async (): Promise<Theme[]> => {
-  const response = await fetch("/api/themes");
+  const response = await apiFetch("/api/themes");
   if (!response.ok) {
     throw new Error("Failed to fetch themes");
   }
@@ -29,7 +30,7 @@ const fetchThemes = async (): Promise<Theme[]> => {
 };
 
 const fetchUserThemes = async (): Promise<Theme[]> => {
-  const response = await fetch("/api/themes/user");
+  const response = await apiFetch("/api/themes/user");
   if (!response.ok) {
     // User might not be authenticated, which is fine
     return [];
@@ -41,7 +42,7 @@ const fetchUserThemes = async (): Promise<Theme[]> => {
 const createThemeMutation = async (
   themeData: Omit<Theme, "id">
 ): Promise<Theme> => {
-  const response = await fetch("/api/themes", {
+  const response = await apiFetch("/api/themes", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -64,7 +65,7 @@ const updateThemeMutation = async ({
   themeId: string;
   themeData: Partial<Theme>;
 }): Promise<Theme> => {
-  const response = await fetch(`/api/themes/${themeId}`, {
+  const response = await apiFetch(`/api/themes/${themeId}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -81,7 +82,7 @@ const updateThemeMutation = async ({
 };
 
 const deleteThemeMutation = async (themeId: string): Promise<boolean> => {
-  const response = await fetch(`/api/themes/${themeId}`, {
+  const response = await apiFetch(`/api/themes/${themeId}`, {
     method: "DELETE",
   });
 
@@ -99,7 +100,7 @@ const setThemeVisibilityMutation = async ({
   themeId: string;
   isPublic: boolean;
 }): Promise<Theme> => {
-  const response = await fetch(`/api/themes/${themeId}/visibility`, {
+  const response = await apiFetch(`/api/themes/${themeId}/visibility`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

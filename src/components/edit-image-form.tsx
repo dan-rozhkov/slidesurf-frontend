@@ -1,4 +1,5 @@
 
+import { apiFetch } from "@/api/client";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
@@ -92,7 +93,7 @@ export const EditImageForm = ({
     try {
       setIsGeneratingPrompt(true);
 
-      const response = await fetch("/api/generate/image/prompt", {
+      const response = await apiFetch("/api/generate/image/prompt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slideContent: currentSlide.content }),

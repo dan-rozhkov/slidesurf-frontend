@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { apiFetch } from "@/api/client";
 import { useSubscriptionDialog } from "@/lib/hooks/use-subscription-dialog";
 import {
   Dialog,
@@ -42,7 +43,7 @@ export function SubscriptionDialog() {
           }
         : null;
 
-      const response = await fetch("/api/subscription/process", {
+      const response = await apiFetch("/api/subscription/process", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

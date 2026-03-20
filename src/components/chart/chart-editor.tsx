@@ -1,5 +1,6 @@
 
 import { useState, useCallback } from "react";
+import { apiFetch } from "@/api/client";
 import Spreadsheet from "react-spreadsheet";
 import { Matrix } from "@iddan/react-spreadsheet";
 import { ChartToolbar } from "./chart-toolbar";
@@ -88,7 +89,7 @@ export const ChartEditor = ({
   const handleGenerateChart = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/generate/chart", {
+      const response = await apiFetch("/api/generate/chart", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),

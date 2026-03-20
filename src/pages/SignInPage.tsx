@@ -22,14 +22,14 @@ export default function SignInPage() {
   const signInWithYandex = async () => {
     await authClient.signIn.oauth2({
       providerId: "yandex",
-      callbackURL: "/dashboard",
+      callbackURL: `${window.location.origin}/dashboard`,
     });
   };
 
   const signInWithGoogle = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "/dashboard",
+      callbackURL: `${window.location.origin}/dashboard`,
     });
   };
 

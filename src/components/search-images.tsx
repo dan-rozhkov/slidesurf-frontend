@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useState } from "react";
+import { apiFetch } from "@/api/client";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -55,7 +56,7 @@ export const SearchImages = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/search/${data.provider}`, {
+      const response = await apiFetch(`/api/search/${data.provider}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: data.query }),

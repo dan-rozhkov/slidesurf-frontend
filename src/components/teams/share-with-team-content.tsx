@@ -1,4 +1,5 @@
 
+import { apiFetch } from "@/api/client";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -34,7 +35,7 @@ export function ShareWithTeamContent({
   const { data: sharedTeams, isLoading: sharedLoading } = useQuery({
     queryKey: ["presentation-teams", presentationId],
     queryFn: async () => {
-      const res = await fetch(`/api/presentations/${presentationId}/teams`);
+      const res = await apiFetch(`/api/presentations/${presentationId}/teams`);
       if (!res.ok) return [];
       const data = await res.json();
       return data.teams as { id: string; name: string }[];

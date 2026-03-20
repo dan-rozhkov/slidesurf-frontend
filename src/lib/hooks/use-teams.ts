@@ -1,7 +1,7 @@
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { apiRequest } from "@/api/client";
 import type {
-  Team,
   TeamWithRole,
   TeamWithMembers,
   TeamMember,
@@ -13,11 +13,7 @@ export function useTeams() {
   return useQuery<TeamWithRole[]>({
     queryKey: ["teams"],
     queryFn: async () => {
-      const res = await fetch("/api/teams");
-      if (!res.ok) {
-        throw new Error("Failed to fetch teams");
-      }
-      const data = await res.json();
+      const data = await apiRequest<{ teams: TeamWithRole[] }>("/api/teams");
       return data.teams;
     },
   });
@@ -29,12 +25,7 @@ export function useTeam(teamId: string | null) {
     queryKey: ["team", teamId],
     queryFn: async () => {
       if (!teamId) return null;
-      const res = await fetch(`/api/teams/${teamId}`);
-      if (!res.ok) {
-        if (res.status === 404) return null;
-        throw new Error("Failed to fetch team");
-      }
-      const data = await res.json();
+      const data = await apiRequest<{ team: TeamWithMembers }>(`/api/teams/${teamId}`);
       return data.team;
     },
     enabled: !!teamId,
@@ -47,11 +38,7 @@ export function useTeamMembers(teamId: string | null) {
     queryKey: ["team-members", teamId],
     queryFn: async () => {
       if (!teamId) return [];
-      const res = await fetch(`/api/teams/${teamId}/members`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch team members");
-      }
-      const data = await res.json();
+      const data = await apiRequest<{ members: TeamMember[] }>(`/api/teams/${teamId}/members`);
       return data.members;
     },
     enabled: !!teamId,
@@ -64,11 +51,7 @@ export function useTeamInvitations(teamId: string | null) {
     queryKey: ["team-invitations", teamId],
     queryFn: async () => {
       if (!teamId) return [];
-      const res = await fetch(`/api/teams/${teamId}/invitations`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch team invitations");
-      }
-      const data = await res.json();
+      const data = await apiRequest<{ invitations: TeamInvitation[] }>(`/api/teams/${teamId}/invitations`);
       return data.invitations;
     },
     enabled: !!teamId,
@@ -81,16 +64,10 @@ export function useCreateTeam() {
 
   return useMutation({
     mutationFn: async (data: { name: string; description?: string }) => {
-      const res = await fetch("/api/teams", {
+      return apiRequest("/api/teams", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to create team");
-      }
-      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["teams"] });
@@ -110,16 +87,10 @@ export function useUpdateTeam() {
       teamId: string;
       data: { name?: string; description?: string };
     }) => {
-      const res = await fetch(`/api/teams/${teamId}`, {
+      return apiRequest(`/api/teams/${teamId}`, {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to update team");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["teams"] });
@@ -134,14 +105,9 @@ export function useDeleteTeam() {
 
   return useMutation({
     mutationFn: async (teamId: string) => {
-      const res = await fetch(`/api/teams/${teamId}`, {
+      return apiRequest(`/api/teams/${teamId}`, {
         method: "DELETE",
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to delete team");
-      }
-      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["teams"] });
@@ -161,16 +127,10 @@ export function useInviteMember() {
       teamId: string;
       email: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/members`, {
+      return apiRequest(`/api/teams/${teamId}/members`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to invite member");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -192,16 +152,10 @@ export function useRemoveMember() {
       teamId: string;
       userId: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/members`, {
+      return apiRequest(`/api/teams/${teamId}/members`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to remove member");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -218,14 +172,9 @@ export function useLeaveTeam() {
 
   return useMutation({
     mutationFn: async (teamId: string) => {
-      const res = await fetch(`/api/teams/${teamId}/leave`, {
+      return apiRequest(`/api/teams/${teamId}/leave`, {
         method: "POST",
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to leave team");
-      }
-      return res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["teams"] });
@@ -245,16 +194,10 @@ export function useTransferOwnership() {
       teamId: string;
       newOwnerId: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/transfer-ownership`, {
+      return apiRequest(`/api/teams/${teamId}/transfer-ownership`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ newOwnerId }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to transfer ownership");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({ queryKey: ["teams"] });
@@ -278,16 +221,10 @@ export function useCancelInvitation() {
       teamId: string;
       invitationId: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/invitations`, {
+      return apiRequest(`/api/teams/${teamId}/invitations`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ invitationId }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to cancel invitation");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -309,16 +246,10 @@ export function useSharePresentationWithTeam() {
       teamId: string;
       presentationId: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/presentations`, {
+      return apiRequest(`/api/teams/${teamId}/presentations`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ presentationId }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to share presentation");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -343,16 +274,10 @@ export function useUnsharePresentationFromTeam() {
       teamId: string;
       presentationId: string;
     }) => {
-      const res = await fetch(`/api/teams/${teamId}/presentations`, {
+      return apiRequest(`/api/teams/${teamId}/presentations`, {
         method: "DELETE",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ presentationId }),
       });
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.error || "Failed to unshare presentation");
-      }
-      return res.json();
     },
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
@@ -371,14 +296,9 @@ export function useTeamPresentations(teamId: string | null) {
     queryKey: ["team-presentations", teamId],
     queryFn: async () => {
       if (!teamId) return [];
-      const res = await fetch(`/api/teams/${teamId}/presentations`);
-      if (!res.ok) {
-        throw new Error("Failed to fetch team presentations");
-      }
-      const data = await res.json();
+      const data = await apiRequest<{ presentations: any[] }>(`/api/teams/${teamId}/presentations`);
       return data.presentations;
     },
     enabled: !!teamId,
   });
 }
-

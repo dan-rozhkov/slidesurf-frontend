@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { apiFetch } from "@/api/client";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
@@ -58,9 +59,8 @@ export default function InvitationPageClient({
   const handleAccept = async () => {
     setIsAccepting(true);
     try {
-      const res = await fetch(`/api/teams/invitations/${token}`, {
+      const res = await apiFetch(`/api/teams/invitations/${token}`, {
         method: "POST",
-        credentials: "include",
       });
 
       if (!res.ok) {

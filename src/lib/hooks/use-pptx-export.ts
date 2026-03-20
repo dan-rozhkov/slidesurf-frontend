@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { apiFetch } from "@/api/client";
 import { toast } from "sonner";
 import { extractSlidesData } from "@/lib/utils/pptx-export";
 import { usePresentationAtom } from "./use-presentation";
@@ -50,7 +51,7 @@ export function usePptxExport() {
       const slidesData = await extractSlidesData(slideElements);
 
       // Send data to the backend for PPTX generation
-      const response = await fetch("/api/export-pptx", {
+      const response = await apiFetch("/api/export-pptx", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

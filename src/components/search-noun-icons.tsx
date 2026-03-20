@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useState, useMemo } from "react";
+import { apiFetch } from "@/api/client";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -53,7 +54,7 @@ export const SearchNounIcons = ({
     setIsLoading(true);
 
     try {
-      const response = await fetch(`/api/search/nounproject`, {
+      const response = await apiFetch(`/api/search/nounproject`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: data.query }),
@@ -73,7 +74,7 @@ export const SearchNounIcons = ({
     setSelectedIconId(iconId);
 
     try {
-      const response = await fetch(`/api/search/nounproject/download`, {
+      const response = await apiFetch(`/api/search/nounproject/download`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

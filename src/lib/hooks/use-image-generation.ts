@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSubscriptionDialog } from "@/lib/hooks/use-subscription-dialog";
 import { toast } from "sonner";
+import { apiFetch } from "@/api/client";
 
 export const useImageGeneration = () => {
   const [isGenerating, setIsGenerating] = useState(false);
@@ -12,7 +13,7 @@ export const useImageGeneration = () => {
     try {
       setIsGenerating(true);
 
-      const response = await fetch("/api/generate/image", {
+      const response = await apiFetch("/api/generate/image", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

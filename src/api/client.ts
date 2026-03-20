@@ -1,4 +1,14 @@
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+export const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
+
+/**
+ * Drop-in fetch replacement that prepends BASE_URL and sets credentials: "include".
+ */
+export function apiFetch(path: string, options?: RequestInit): Promise<Response> {
+  return fetch(`${BASE_URL}${path}`, {
+    ...options,
+    credentials: "include",
+  });
+}
 
 export class ApiError extends Error {
   constructor(

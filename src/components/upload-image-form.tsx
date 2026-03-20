@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { useState, useRef } from "react";
+import { apiFetch } from "@/api/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader, Trash2 } from "lucide-react";
@@ -42,7 +43,7 @@ export default function UploadImageForm({
                 formData.append("file", selectedFile);
                 formData.append("presentationId", presentationAtom.id);
 
-                const response = await fetch("/api/upload", {
+                const response = await apiFetch("/api/upload", {
                   method: "POST",
                   body: formData,
                 });

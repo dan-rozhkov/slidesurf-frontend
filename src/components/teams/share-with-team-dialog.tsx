@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { apiFetch } from "@/api/client";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -53,7 +54,7 @@ export function ShareWithTeamDialog({
   const { data: sharedTeams, isLoading: sharedLoading } = useQuery({
     queryKey: ["presentation-teams", presentationId],
     queryFn: async () => {
-      const res = await fetch(`/api/presentations/${presentationId}/teams`);
+      const res = await apiFetch(`/api/presentations/${presentationId}/teams`);
       if (!res.ok) return [];
       const data = await res.json();
       return data.teams as { id: string; name: string }[];

@@ -1,5 +1,6 @@
 
 import { useState, useRef } from "react";
+import { apiFetch } from "@/api/client";
 import { Upload, X, Loader, Image as ImageIcon } from "lucide-react";
 import { toast } from "sonner";
 import { useScopedI18n } from "@/lib/locales/client";
@@ -140,7 +141,7 @@ export function AssetsSection({
     formData.append("type", type);
 
     try {
-      const response = await fetch("/api/themes/assets/upload", {
+      const response = await apiFetch("/api/themes/assets/upload", {
         method: "POST",
         body: formData,
       });
@@ -215,7 +216,7 @@ export function AssetsSection({
 
     try {
       // Delete from S3
-      const response = await fetch(
+      const response = await apiFetch(
         `/api/themes/assets/delete?url=${encodeURIComponent(imageUrl)}`,
         {
           method: "DELETE",

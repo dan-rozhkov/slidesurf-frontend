@@ -1,5 +1,6 @@
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import { apiFetch } from "@/api/client";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -147,7 +148,7 @@ export function usePresentationGeneration(locale: string) {
         setSections([]);
       }
 
-      const response = await fetch("/api/generate/plan", {
+      const response = await apiFetch("/api/generate/plan", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -274,7 +275,7 @@ export function usePresentationGeneration(locale: string) {
         const attempts = 3;
         for (let attempt = 0; attempt < attempts; attempt += 1) {
           try {
-            const researchResponse = await fetch(`/api/plans/${responsePlanId}`);
+            const researchResponse = await apiFetch(`/api/plans/${responsePlanId}`);
             if (researchResponse.ok) {
               const data = (await researchResponse.json()) as {
                 research?: string | null;
@@ -319,7 +320,7 @@ export function usePresentationGeneration(locale: string) {
       if (!planId) return;
 
       try {
-        await fetch(`/api/plans/${planId}`, {
+        await apiFetch(`/api/plans/${planId}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
