@@ -1,5 +1,6 @@
 
 import { BASE_URL } from "@/api/client";
+import { DefaultChatTransport } from "ai";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import {
@@ -115,8 +116,10 @@ export default function AgentChat() {
   );
 
   const { messages, sendMessage, status, regenerate, setMessages } = useChat({
-    api: `${BASE_URL}/api/chat`,
-    credentials: "include",
+    transport: new DefaultChatTransport({
+      api: `${BASE_URL}/api/chat`,
+      credentials: "include",
+    }),
     onFinish: ({ messages: allMessages }) => {
       // Find updateSlideContent tool results
       const updateResults: Array<{
