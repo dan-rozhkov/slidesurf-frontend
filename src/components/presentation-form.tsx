@@ -332,7 +332,8 @@ export function PresentationForm({
               </SelectContent>
             </Select>
 
-            <Select
+            {/* Model selection temporarily disabled — always uses first model from list */}
+            {/* <Select
               onValueChange={(value) => form.setValue("model", value)}
               value={model}
             >
@@ -360,7 +361,7 @@ export function PresentationForm({
                   );
                 })}
               </SelectContent>
-            </Select>
+            </Select> */}
 
             <Select
               onValueChange={(value) =>
