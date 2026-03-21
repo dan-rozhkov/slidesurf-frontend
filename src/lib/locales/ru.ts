@@ -542,7 +542,7 @@ export default {
     copy: "Скопировать",
     clear: "Очистить чат",
     beta: "Бета",
-    welcomeUser: "Привет, {{name}}!",
+    welcomeUser: "Привет, {name}!",
     welcomeFallback: "друг",
     noMessagesYet: "Нет сообщений",
     startConversation: "Чем могу помочь?",

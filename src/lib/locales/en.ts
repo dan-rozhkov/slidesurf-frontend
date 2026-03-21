@@ -541,7 +541,7 @@ export default {
     copy: "Copy",
     clear: "Clear chat",
     beta: "Beta",
-    welcomeUser: "Hi, {{name}}!",
+    welcomeUser: "Hi, {name}!",
     welcomeFallback: "there",
     noMessagesYet: "No messages yet",
     startConversation: "Start a conversation to see messages here",
