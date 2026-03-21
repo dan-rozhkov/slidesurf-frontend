@@ -1,52 +1,57 @@
+import { lazy, Suspense } from "react";
 import { createBrowserRouter } from "react-router-dom";
 import { RootLayout } from "@/layouts/RootLayout";
 import { SidebarLayout } from "@/layouts/SidebarLayout";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 
-import LandingPage from "@/pages/LandingPage";
-import DashboardPage from "@/pages/DashboardPage";
-import CreatePage from "@/pages/CreatePage";
-import EditorPage from "@/pages/EditorPage";
-import EditorWithIdPage from "@/pages/EditorWithIdPage";
-import EditorPreviewPage from "@/pages/EditorPreviewPage";
-import ExportPage from "@/pages/ExportPage";
-import PresentPage from "@/pages/PresentPage";
-import OfferPage from "@/pages/OfferPage";
-import PrivacyPage from "@/pages/PrivacyPage";
-import SharedPage from "@/pages/SharedPage";
-import TrashPage from "@/pages/TrashPage";
-import TemplatesPage from "@/pages/TemplatesPage";
-import ThemesPage from "@/pages/ThemesPage";
-import SettingsPage from "@/pages/SettingsPage";
-import TeamsPage from "@/pages/TeamsPage";
-import TeamDetailPage from "@/pages/TeamDetailPage";
-import InvitationPage from "@/pages/InvitationPage";
-import SignInPage from "@/pages/SignInPage";
-import SignUpPage from "@/pages/SignUpPage";
-import ForgotPasswordPage from "@/pages/ForgotPasswordPage";
-import ResetPasswordPage from "@/pages/ResetPasswordPage";
+const LandingPage = lazy(() => import("@/pages/LandingPage"));
+const DashboardPage = lazy(() => import("@/pages/DashboardPage"));
+const CreatePage = lazy(() => import("@/pages/CreatePage"));
+const EditorPage = lazy(() => import("@/pages/EditorPage"));
+const EditorWithIdPage = lazy(() => import("@/pages/EditorWithIdPage"));
+const EditorPreviewPage = lazy(() => import("@/pages/EditorPreviewPage"));
+const ExportPage = lazy(() => import("@/pages/ExportPage"));
+const PresentPage = lazy(() => import("@/pages/PresentPage"));
+const OfferPage = lazy(() => import("@/pages/OfferPage"));
+const PrivacyPage = lazy(() => import("@/pages/PrivacyPage"));
+const SharedPage = lazy(() => import("@/pages/SharedPage"));
+const TrashPage = lazy(() => import("@/pages/TrashPage"));
+const TemplatesPage = lazy(() => import("@/pages/TemplatesPage"));
+const ThemesPage = lazy(() => import("@/pages/ThemesPage"));
+const SettingsPage = lazy(() => import("@/pages/SettingsPage"));
+const TeamsPage = lazy(() => import("@/pages/TeamsPage"));
+const TeamDetailPage = lazy(() => import("@/pages/TeamDetailPage"));
+const InvitationPage = lazy(() => import("@/pages/InvitationPage"));
+const SignInPage = lazy(() => import("@/pages/SignInPage"));
+const SignUpPage = lazy(() => import("@/pages/SignUpPage"));
+const ForgotPasswordPage = lazy(() => import("@/pages/ForgotPasswordPage"));
+const ResetPasswordPage = lazy(() => import("@/pages/ResetPasswordPage"));
+
+function LazyPage({ children }: { children: React.ReactNode }) {
+  return <Suspense fallback={null}>{children}</Suspense>;
+}
 
 export const router = createBrowserRouter([
   {
     element: <RootLayout />,
     children: [
       // Public pages
-      { path: "/", element: <LandingPage /> },
-      { path: "/privacy", element: <PrivacyPage /> },
-      { path: "/offer", element: <OfferPage /> },
+      { path: "/", element: <LazyPage><LandingPage /></LazyPage> },
+      { path: "/privacy", element: <LazyPage><PrivacyPage /></LazyPage> },
+      { path: "/offer", element: <LazyPage><OfferPage /></LazyPage> },
 
       // Auth pages (redirect if already authenticated)
-      { path: "/sign-in", element: <SignInPage /> },
-      { path: "/sign-up", element: <SignUpPage /> },
-      { path: "/forgot-password", element: <ForgotPasswordPage /> },
-      { path: "/reset-password", element: <ResetPasswordPage /> },
+      { path: "/sign-in", element: <LazyPage><SignInPage /></LazyPage> },
+      { path: "/sign-up", element: <LazyPage><SignUpPage /></LazyPage> },
+      { path: "/forgot-password", element: <LazyPage><ForgotPasswordPage /></LazyPage> },
+      { path: "/reset-password", element: <LazyPage><ResetPasswordPage /></LazyPage> },
 
       // Public/shared presentation pages
-      { path: "/present/:id", element: <PresentPage /> },
-      { path: "/export/:id", element: <ExportPage /> },
+      { path: "/present/:id", element: <LazyPage><PresentPage /></LazyPage> },
+      { path: "/export/:id", element: <LazyPage><ExportPage /></LazyPage> },
 
       // Team invitation (may be unauthenticated)
-      { path: "/teams/invitations/:token", element: <InvitationPage /> },
+      { path: "/teams/invitations/:token", element: <LazyPage><InvitationPage /></LazyPage> },
 
       // Protected pages with sidebar
       {
@@ -55,21 +60,21 @@ export const router = createBrowserRouter([
           {
             element: <SidebarLayout />,
             children: [
-              { path: "/dashboard", element: <DashboardPage /> },
-              { path: "/shared", element: <SharedPage /> },
-              { path: "/trash", element: <TrashPage /> },
-              { path: "/templates", element: <TemplatesPage /> },
-              { path: "/themes", element: <ThemesPage /> },
-              { path: "/settings", element: <SettingsPage /> },
-              { path: "/teams", element: <TeamsPage /> },
-              { path: "/teams/:id", element: <TeamDetailPage /> },
+              { path: "/dashboard", element: <LazyPage><DashboardPage /></LazyPage> },
+              { path: "/shared", element: <LazyPage><SharedPage /></LazyPage> },
+              { path: "/trash", element: <LazyPage><TrashPage /></LazyPage> },
+              { path: "/templates", element: <LazyPage><TemplatesPage /></LazyPage> },
+              { path: "/themes", element: <LazyPage><ThemesPage /></LazyPage> },
+              { path: "/settings", element: <LazyPage><SettingsPage /></LazyPage> },
+              { path: "/teams", element: <LazyPage><TeamsPage /></LazyPage> },
+              { path: "/teams/:id", element: <LazyPage><TeamDetailPage /></LazyPage> },
             ],
           },
           // Protected pages without sidebar
-          { path: "/create", element: <CreatePage /> },
-          { path: "/editor", element: <EditorPage /> },
-          { path: "/editor/:id", element: <EditorWithIdPage /> },
-          { path: "/editor/preview", element: <EditorPreviewPage /> },
+          { path: "/create", element: <LazyPage><CreatePage /></LazyPage> },
+          { path: "/editor", element: <LazyPage><EditorPage /></LazyPage> },
+          { path: "/editor/:id", element: <LazyPage><EditorWithIdPage /></LazyPage> },
+          { path: "/editor/preview", element: <LazyPage><EditorPreviewPage /></LazyPage> },
         ],
       },
     ],
