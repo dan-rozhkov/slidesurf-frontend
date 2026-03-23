@@ -9,6 +9,7 @@ import {
   Redo,
   HelpCircle,
   Sparkles,
+  Settings,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -28,6 +29,7 @@ import { useUndoRedo } from "@anandarizki/use-undo-redo";
 import { useIsPresentingAtom } from "@/lib/hooks/use-is-presenting";
 import { useThemes } from "@/lib/hooks/use-themes";
 import { useChatOpenAtom } from "@/lib/hooks/use-chat-open";
+import { useSettingsOpenAtom } from "@/lib/hooks/use-settings-open";
 import {
   Tooltip,
   TooltipContent,
@@ -41,6 +43,7 @@ const Toolbar = () => {
   const navigate = useNavigate();
   const { themes, isLoading: themesLoading } = useThemes();
   const [isChatOpen, setIsChatOpen] = useChatOpenAtom();
+  const [isSettingsOpen, setIsSettingsOpen] = useSettingsOpenAtom();
   const [undo, redo, { canUndo, canRedo }] = useUndoRedo([
     presentationAtom,
     setPresentationAtom,
@@ -212,10 +215,32 @@ const Toolbar = () => {
         <Tooltip delayDuration={300}>
           <TooltipTrigger asChild>
             <Button
+              variant="ghost"
+              size="icon"
+              className="h-8"
+              onClick={() => {
+                setIsSettingsOpen((v) => !v);
+                if (!isSettingsOpen) setIsChatOpen(false);
+              }}
+            >
+              <Settings className="!size-5" strokeWidth={1.5} />
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent side="bottom" align="center">
+            {isSettingsOpen ? t("settingsClose") : t("settingsOpen")}
+          </TooltipContent>
+        </Tooltip>
+
+        <Tooltip delayDuration={300}>
+          <TooltipTrigger asChild>
+            <Button
               variant="outline"
               className="relative"
               size="sm"
-              onClick={() => setIsChatOpen((v) => !v)}
+              onClick={() => {
+                setIsChatOpen((v) => !v);
+                if (!isChatOpen) setIsSettingsOpen(false);
+              }}
             >
               <Sparkles className="!size-5" strokeWidth={1.5} />
               {t("agent")}

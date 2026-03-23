@@ -3,6 +3,11 @@ import { memo, useMemo } from "react";
 import { useAtomValue } from "jotai";
 import { presentationAtom } from "@/lib/hooks/use-presentation";
 import { useTheme } from "@/lib/hooks/use-theme";
+import {
+  FONT_SIZE_PRESETS,
+  DEFAULT_FONT_SIZES,
+  DEFAULT_LINE_HEIGHTS,
+} from "@/lib/font-size-presets";
 
 const ThemeInit = () => {
   const presentation = useAtomValue(presentationAtom);
@@ -97,11 +102,19 @@ const ThemeInit = () => {
         --slide-smart-layout-stat-empty: ${theme?.colors?.smartLayout
           ?.statEmpty};
 
-        ${theme?.fontSizes
-          ? Object.entries(theme.fontSizes)
-              .map(([key, value]) => `--slide-${key}-font-size: ${value}em;`)
-              .join("\n")
-          : ""}
+        ${(() => {
+          const preset = FONT_SIZE_PRESETS[presentation?.fontSizePreset ?? "M"];
+          const fontSizes = theme?.fontSizes as Record<string, number> | null;
+          const keys = Object.keys(DEFAULT_FONT_SIZES) as Array<keyof typeof DEFAULT_FONT_SIZES>;
+          const fontVars = keys.map((key) => {
+            const base = (fontSizes?.[key] ?? DEFAULT_FONT_SIZES[key]);
+            return `--slide-${key}-font-size: ${(base * preset.fontScale).toFixed(4)}em;`;
+          });
+          const lineHeightVars = preset.lineHeights
+            ? keys.map((key) => `--slide-${key}-line-height: ${preset.lineHeights![key]};`)
+            : [];
+          return [...fontVars, ...lineHeightVars].join("\n");
+        })()}
 
         --slide-image-mask-url: ${theme?.imageMaskUrl
           ? `url(${theme.imageMaskUrl})`

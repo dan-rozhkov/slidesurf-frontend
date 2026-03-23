@@ -49,11 +49,14 @@ export type Slide = {
   index?: number;
 };
 
+export type FontSizePreset = "S" | "M" | "L";
+
 export type Presentation = {
   id: string;
   title: string;
   slides: Slide[];
   themeId: string;
+  fontSizePreset?: FontSizePreset;
   planId?: string | null;
   isDeleted?: boolean;
   isShared?: boolean;

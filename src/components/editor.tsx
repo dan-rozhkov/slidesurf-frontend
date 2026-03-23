@@ -44,6 +44,8 @@ import { SlidePlaceholder } from "./editor/slide-placeholder";
 import { FeedbackRatingCard } from "./feedback-rating-card";
 import { useTheme } from "@/lib/hooks/use-theme";
 import { useChatOpenAtom } from "@/lib/hooks/use-chat-open";
+import { useSettingsOpenAtom } from "@/lib/hooks/use-settings-open";
+import SettingsPanel from "./settings-panel";
 
 const Editor = ({
   initialPresentation,
@@ -62,6 +64,7 @@ const Editor = ({
   const hasGeneratedRef = useRef(false);
   const isGeneratingRef = useRef(false);
   const [isChatOpen, setIsChatOpen] = useChatOpenAtom();
+  const [isSettingsOpen] = useSettingsOpenAtom();
   const { theme } = useTheme(presentationAtom?.themeId || null);
   const debouncedUpdatePresentation = useDebouncedCallback(
     updatePresentation,
@@ -145,6 +148,7 @@ const Editor = ({
     if (presentationAtom && !isPresenting && !isGeneratingRef.current) {
       debouncedUpdatePresentation(presentationAtom.id, {
         slides: presentationAtom.slides,
+        fontSizePreset: presentationAtom.fontSizePreset,
       });
     }
   }, [presentationAtom, debouncedUpdatePresentation, isPresenting]);
@@ -152,7 +156,7 @@ const Editor = ({
   // Recalculate font size when chat opens/closes
   useEffect(() => {
     debouncedCalculateFontSize();
-  }, [isChatOpen, debouncedCalculateFontSize]);
+  }, [isChatOpen, isSettingsOpen, debouncedCalculateFontSize]);
 
   const handleZoomChange = (value: number[]) => {
     setZoom(value[0]);
@@ -366,6 +370,7 @@ const Editor = ({
       </div>
 
       <EditImageSheet />
+      <SettingsPanel />
     </div>
   );
 };
