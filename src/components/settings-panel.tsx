@@ -24,7 +24,7 @@ const SettingsPanel = () => {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetContent className="overflow-y-auto !duration-0 !transition-none">
+      <SheetContent className="overflow-y-auto">
         <SheetHeader>
           <SheetTitle>{t("settings")}</SheetTitle>
           <SheetDescription>{t("settingsDescription")}</SheetDescription>
