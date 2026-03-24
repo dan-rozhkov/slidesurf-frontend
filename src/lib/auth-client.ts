@@ -15,12 +15,14 @@ export const authClient = createAuthClient({
       return context;
     },
     onSuccess(context) {
-      const authToken = context.response.headers.get("set-auth-token");
-      if (authToken) {
-        localStorage.setItem(TOKEN_KEY, authToken);
+      // Store token from response body (sign-in/sign-up return it directly)
+      if (context.data?.token && typeof context.data.token === "string") {
+        localStorage.setItem(TOKEN_KEY, context.data.token);
       }
-      // Clear token on sign-out
-      const url = typeof context.request.url === "string" ? context.request.url : context.request.url.toString();
+      const url =
+        typeof context.request.url === "string"
+          ? context.request.url
+          : context.request.url.toString();
       if (url.includes("/sign-out")) {
         localStorage.removeItem(TOKEN_KEY);
       }
