@@ -91,6 +91,14 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
       };
     }, [showLabels, showValues, containerWidth]);
 
+  const xAxisTickProps = useMemo(() => {
+    if (!shouldShowLabels || data.length <= 2) return { interval: 0 };
+    if (data.length > 6) {
+      return { ticks: [data[0].name, data[data.length - 1].name] };
+    }
+    return { interval: 0 };
+  }, [shouldShowLabels, data]);
+
   const shouldReserveYAxisSpace =
     chartType === "h-bar" &&
     shouldShowLabels &&
@@ -155,6 +163,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
               padding={{ left: 0, right: 0 }}
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
               hide={!shouldShowLabels}
+              {...xAxisTickProps}
             />
             <YAxis
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
@@ -273,6 +282,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
               dataKey="name"
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
               hide={!shouldShowLabels}
+              {...xAxisTickProps}
             />
             <YAxis
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
@@ -401,6 +411,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
               dataKey="name"
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
               hide={!shouldShowLabels}
+              {...xAxisTickProps}
             />
             <YAxis
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
@@ -572,6 +583,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
               dataKey="name"
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
               hide={!shouldShowLabels}
+              {...xAxisTickProps}
             />
             <YAxis
               tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
