@@ -131,6 +131,7 @@ export const cards: SlideTemplate = {
   content: dedent.withOptions({
     escapeSpecialCharacters: false,
   })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Преимущества</h4>
     <h1>Заголовок</h1>
     <div data-type="columns">
       <div data-type="column">
@@ -138,7 +139,9 @@ export const cards: SlideTemplate = {
           <p>
             <span data-type="icon" data-icon-name="rocket" data-icon-size="xl"></span>
           </p>
-          <p>Текст</p>
+          <p></p>
+          <h3>Подзаголовок</h3>
+          <p>Описание преимущества с конкретными данными и фактами в 1-2 предложения</p>
         </div>
       </div>
       <div data-type="column">
@@ -146,7 +149,9 @@ export const cards: SlideTemplate = {
           <p>
             <span data-type="icon" data-icon-name="target" data-icon-size="xl"></span>
           </p>
-          <p>Текст</p>
+          <p></p>
+          <h3>Подзаголовок</h3>
+          <p>Описание преимущества с конкретными данными и фактами в 1-2 предложения</p>
         </div>
       </div>
       <div data-type="column">
@@ -154,7 +159,9 @@ export const cards: SlideTemplate = {
           <p>
             <span data-type="icon" data-icon-name="trophy" data-icon-size="xl"></span>
           </p>
-          <p>Текст</p>
+          <p></p>
+          <h3>Подзаголовок</h3>
+          <p>Описание преимущества с конкретными данными и фактами в 1-2 предложения</p>
         </div>
       </div>
     </div>
@@ -169,7 +176,7 @@ export const frontSlide: SlideTemplate = {
   content: dedent.withOptions({
     escapeSpecialCharacters: false,
   })`
-    <h1 style="font-size: 2.5em; font-weight: bold; line-height: 1.2em; text-align: left;">Заголовок</h1>
+    <h1 style="text-align: left;">Заголовок</h1>
     <p style="text-align: left;">Текст</p>
     <p style="text-align: left;">${new Date().toLocaleDateString("ru-RU")}</p>
   `,
@@ -306,16 +313,19 @@ export const threeColsWithIcons: SlideTemplate = {
     <div data-type="columns">
       <div data-type="column">
         <p style="text-align: center"><span data-type="icon" data-icon-name="lightbulb" data-icon-size="xl"></span></p>
+        <p></p>
         <h3 style="text-align: center">Заголовок</h3>
         <p style="text-align: center">Текст</p>
       </div>
       <div data-type="column">
         <p style="text-align: center"><span data-type="icon" data-icon-name="shield" data-icon-size="xl"></span></p>
+        <p></p>
         <h3 style="text-align: center">Заголовок</h3>
         <p style="text-align: center">Текст</p>
       </div>
       <div data-type="column">
         <p style="text-align: center"><span data-type="icon" data-icon-name="zap" data-icon-size="xl"></span></p>
+        <p></p>
         <h3 style="text-align: center">Заголовок</h3>
         <p style="text-align: center">Текст</p>
       </div>
@@ -562,6 +572,201 @@ export const bentoGrid: SlideTemplate = {
   `,
 };
 
+export const tocSlide: SlideTemplate = {
+  name: "tocSlide",
+  description: "Слайд с содержанием презентации и нумерованными разделами",
+  layout: SlideLayout.WITHOUT,
+  verticalAlign: SlideVerticalAlign.CENTER,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Структура презентации</h4>
+    <h1>Содержание</h1>
+    <div data-type="columns">
+      <div data-type="column">
+        <div data-type="card">
+          <h1>01</h1>
+          <h3>Обзор рынка и текущие тенденции</h3>
+          <p>Анализ ключевых показателей, динамики роста и основных трендов за последние годы</p>
+        </div>
+      </div>
+      <div data-type="column">
+        <div data-type="card">
+          <h1>02</h1>
+          <h3>Конкурентный ландшафт и позиционирование</h3>
+          <p>Сравнительный анализ ключевых игроков, их стратегий и рыночных долей</p>
+        </div>
+      </div>
+      <div data-type="column">
+        <div data-type="card">
+          <h1>03</h1>
+          <h3>Стратегия развития и рекомендации</h3>
+          <p>Инвестиционные возможности, прогнозы роста и практические рекомендации</p>
+        </div>
+      </div>
+    </div>
+  `,
+};
+
+export const chapterDivider: SlideTemplate = {
+  name: "chapterDivider",
+  description: "Слайд-разделитель главы с заголовком и KPI-метриками",
+  layout: SlideLayout.TOP_IMAGE,
+  verticalAlign: SlideVerticalAlign.BOTTOM,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Глава 01</h4>
+    <h1>Обзор рынка и ключевые показатели</h1>
+    <p>Масштаб рынка, динамика роста и позиционирование среди глобальных конкурентов</p>
+    <p></p>
+    <div data-smart-layout-type="big-numbers" data-type="smart-layout">
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="#2" data-type="smart-layout-item">
+        <h4>Позиция в мире</h4>
+        <p>По объёму потребления</p>
+      </div>
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="16.7%" data-type="smart-layout-item">
+        <h4>Доля рынка</h4>
+        <p>Мирового спроса</p>
+      </div>
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="$153B" data-type="smart-layout-item">
+        <h4>Прогноз к 2033</h4>
+        <p>Объём рынка</p>
+      </div>
+    </div>
+  `,
+};
+
+export const dataWithChart: SlideTemplate = {
+  name: "dataWithChart",
+  description: "Аналитический слайд с текстовыми блоками слева и графиком справа",
+  layout: SlideLayout.WITHOUT,
+  verticalAlign: SlideVerticalAlign.CENTER,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Анализ данных</h4>
+    <h1>Динамика и структура рынка</h1>
+    <div data-type="columns">
+      <div data-type="column">
+        <div data-smart-layout-type="arrows-down" data-type="smart-layout">
+          <div data-smart-layout-type="arrows-down" data-smart-layout-value="" data-type="smart-layout-item">
+            <h3>Глобальная позиция</h3>
+            <p>Второе место в мире по объёму потребления — 802.8 метрических тонн</p>
+          </div>
+          <div data-smart-layout-type="arrows-down" data-smart-layout-value="" data-type="smart-layout-item">
+            <h3>Структура спроса</h3>
+            <p>16.1% мирового спроса, общий объём оценивается в $62 млрд</p>
+          </div>
+          <div data-smart-layout-type="arrows-down" data-smart-layout-value="" data-type="smart-layout-item">
+            <h3>Прогноз роста</h3>
+            <p>CAGR 6.5%, к 2033 году рынок достигнет $153 млрд</p>
+          </div>
+        </div>
+      </div>
+      <div data-type="column">
+        <div data-type="chart" data-chart-type="bar" data-show-labels="true" data-data='[[{"value":"Год"},{"value":"Потребление (тонн)"}],[{"value":"2020"},{"value":"446"}],[{"value":"2021"},{"value":"797"}],[{"value":"2022"},{"value":"774"}],[{"value":"2023"},{"value":"761"}],[{"value":"2024"},{"value":"803"}]]'>Chart Data</div>
+        <div data-type="card">
+          <p><span data-type="icon" data-icon-name="trending-up" data-icon-size="md"></span> <strong>Ключевой тренд:</strong> Потребление выросло на <strong>5.5%</strong> за последний год, достигнув рекордных показателей</p>
+        </div>
+      </div>
+    </div>
+  `,
+};
+
+export const conclusionSlide: SlideTemplate = {
+  name: "conclusionSlide",
+  description: "Заключительный слайд с итогами, KPI-метриками и рекомендациями",
+  layout: SlideLayout.TOP_IMAGE,
+  verticalAlign: SlideVerticalAlign.CENTER,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Заключение</h4>
+    <h1>Перспективы и рекомендации</h1>
+    <p>Ключевые выводы по результатам анализа и стратегические рекомендации для принятия решений</p>
+    <p></p>
+    <div data-smart-layout-type="big-numbers" data-type="smart-layout">
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="$153B" data-type="smart-layout-item">
+        <h4>Прогноз рынка</h4>
+        <p>К 2033 году</p>
+      </div>
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="6.5%" data-type="smart-layout-item">
+        <h4>CAGR</h4>
+        <p>Среднегодовой рост</p>
+      </div>
+      <div data-smart-layout-type="big-numbers" data-smart-layout-value="Digital" data-type="smart-layout-item">
+        <h4>Новые возможности</h4>
+        <p>Цифровые платформы</p>
+      </div>
+    </div>
+    <div data-type="card">
+      <p><span data-type="icon" data-icon-name="lightbulb" data-icon-size="md"></span> <strong>Рекомендация:</strong> Рассмотреть инвестиции в цифровые платформы и диверсифицировать портфель с учётом прогнозируемого роста рынка</p>
+    </div>
+  `,
+};
+
+export const contentWithInsight: SlideTemplate = {
+  name: "contentWithInsight",
+  description: "Контентный слайд с текстом и insight-баром внизу",
+  layout: SlideLayout.RIGHT_IMAGE,
+  verticalAlign: SlideVerticalAlign.CENTER,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Обзор рынка</h4>
+    <h1>Ключевые факторы роста</h1>
+    <ul>
+      <li>Увеличение спроса на <strong>40%</strong> в праздничные сезоны, что создаёт устойчивый цикл потребления</li>
+      <li>Рост цифровых платформ позволяет привлечь новую аудиторию и снизить издержки до <strong>0.5-1%</strong></li>
+      <li>Снижение импортных пошлин с <strong>15%</strong> до <strong>6%</strong> стимулирует легальный импорт</li>
+      <li>Обязательная сертификация качества повышает доверие потребителей к рынку</li>
+    </ul>
+    <div data-type="card">
+      <p><span data-type="icon" data-icon-name="info" data-icon-size="md"></span> <strong>Ключевой вывод:</strong> Совокупность регуляторных послаблений и роста цифровых каналов создаёт благоприятные условия для инвестиций</p>
+    </div>
+  `,
+};
+
+export const kpiCards: SlideTemplate = {
+  name: "kpiCards",
+  description: "Слайд с KPI-карточками и крупными метриками",
+  layout: SlideLayout.WITHOUT,
+  verticalAlign: SlideVerticalAlign.CENTER,
+  content: dedent.withOptions({
+    escapeSpecialCharacters: false,
+  })`
+    <h4 style="text-transform: uppercase; letter-spacing: 0.1em">Ключевые показатели</h4>
+    <h1 style="text-align: center">Результаты за 2024 год</h1>
+    <div data-type="columns">
+      <div data-type="column">
+        <div data-type="card">
+          <p style="text-align: center"><span data-type="icon" data-icon-name="trending-up" data-icon-size="xl"></span></p>
+          <p></p>
+          <h2 style="text-align: center">$153B</h2>
+          <p style="text-align: center">Прогнозируемый объём рынка к 2033 году при CAGR 6.5%</p>
+        </div>
+      </div>
+      <div data-type="column">
+        <div data-type="card">
+          <p style="text-align: center"><span data-type="icon" data-icon-name="users" data-icon-size="xl"></span></p>
+          <p></p>
+          <h2 style="text-align: center">16.7%</h2>
+          <p style="text-align: center">Доля мирового спроса, что составляет более 800 метрических тонн</p>
+        </div>
+      </div>
+      <div data-type="column">
+        <div data-type="card">
+          <p style="text-align: center"><span data-type="icon" data-icon-name="award" data-icon-size="xl"></span></p>
+          <p></p>
+          <h2 style="text-align: center">#2</h2>
+          <p style="text-align: center">Позиция в мировом рейтинге по объёму потребления</p>
+        </div>
+      </div>
+    </div>
+  `,
+};
+
 export const SLIDE_TEMPLATES = [
   empty,
   twoColsWithSubheadings,
@@ -586,6 +791,12 @@ export const SLIDE_TEMPLATES = [
   ratingStars,
   quotes,
   bentoGrid,
+  tocSlide,
+  chapterDivider,
+  dataWithChart,
+  conclusionSlide,
+  contentWithInsight,
+  kpiCards,
 ];
 
 export const SLIDE_TEMPLATES_FOR_GENERATION = [
@@ -609,4 +820,10 @@ export const SLIDE_TEMPLATES_FOR_GENERATION = [
   statistics,
   bigNumbers,
   bentoGrid,
+  tocSlide,
+  chapterDivider,
+  dataWithChart,
+  conclusionSlide,
+  contentWithInsight,
+  kpiCards,
 ];

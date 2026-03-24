@@ -103,7 +103,7 @@ const ThemeInit = () => {
           ?.statEmpty};
 
         ${(() => {
-          const preset = FONT_SIZE_PRESETS[presentation?.fontSizePreset ?? "M"];
+          const preset = FONT_SIZE_PRESETS[presentation?.fontSizePreset ?? "S"];
           const fontSizes = theme?.fontSizes as Record<string, number> | null;
           const keys = Object.keys(DEFAULT_FONT_SIZES) as Array<keyof typeof DEFAULT_FONT_SIZES>;
           const fontVars = keys.map((key) => {

@@ -388,7 +388,7 @@ body {
  * 
  */
 
-.slide .node-card {
+.slide [data-type="column"] .node-card:only-child {
   height: 100%;
 }
 
@@ -399,6 +399,9 @@ body {
   padding: var(--slide-card-padding);
   border-radius: var(--slide-card-border-radius);
   border: 0.05em solid var(--slide-card-border-color);
+}
+
+.slide [data-type="column"] .node-card:only-child div[data-type="card"] {
   height: 100%;
 }
 
@@ -1131,6 +1134,15 @@ body {
 .slide [data-type="bento-grid-item"] ol,
 .slide [data-type="bento-grid-item"] a {
   color: var(--slide-card-foreground);
+}
+
+/*
+ * INLINE ICONS
+ *
+ */
+
+.slide .inline-icon-node {
+  vertical-align: middle;
 }
 
 @layer base {

@@ -96,7 +96,7 @@ export function usePresentationGeneration(locale: string) {
       model: textModels[0]?.id ?? "",
       tone: "neutral",
       whom: "all",
-      contentStyle: "less",
+      contentStyle: "as-is",
       useResearch: false,
     },
   });

@@ -29,6 +29,12 @@ import {
   ratingStars,
   quotes,
   bentoGrid,
+  tocSlide,
+  chapterDivider,
+  dataWithChart,
+  conclusionSlide,
+  contentWithInsight,
+  kpiCards,
 } from "@/lib/templates/new-slide-templates";
 import { nanoid } from "nanoid";
 import { domToPng } from "modern-screenshot";
@@ -59,6 +65,12 @@ const SLIDE_TEMPLATES = {
   [SlidesTemplates.RATING_STARS]: ratingStars,
   [SlidesTemplates.QUOTES]: quotes,
   [SlidesTemplates.BENTO_GRID]: bentoGrid,
+  [SlidesTemplates.TOC_SLIDE]: tocSlide,
+  [SlidesTemplates.CHAPTER_DIVIDER]: chapterDivider,
+  [SlidesTemplates.DATA_WITH_CHART]: dataWithChart,
+  [SlidesTemplates.CONCLUSION_SLIDE]: conclusionSlide,
+  [SlidesTemplates.CONTENT_WITH_INSIGHT]: contentWithInsight,
+  [SlidesTemplates.KPI_CARDS]: kpiCards,
 };
 
 export const useSlideActions = () => {

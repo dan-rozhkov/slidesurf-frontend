@@ -20,7 +20,7 @@ const SettingsPanel = () => {
   const t = useScopedI18n("editor");
   const [isOpen, setIsOpen] = useSettingsOpenAtom();
   const [presentation, setPresentation] = usePresentationAtom();
-  const currentPreset = presentation.fontSizePreset ?? "M";
+  const currentPreset = presentation.fontSizePreset ?? "S";
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>

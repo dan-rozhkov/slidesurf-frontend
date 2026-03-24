@@ -56,8 +56,9 @@ export const SmartLayoutItemView = memo(
 
     const getLayoutClassName = (layoutType: SmartLayoutType) => {
       switch (layoutType) {
-        case "statistics":
         case "big-numbers":
+          return "flex flex-col items-start justify-center w-full";
+        case "statistics":
         case "raiting-stars":
           return "flex flex-col items-center justify-center w-full";
         case "quotes":

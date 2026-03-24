@@ -22,6 +22,7 @@
 .idea
 .cursor
 AGENTS.md
+.playwright-mcp
 
 # debug
 npm-debug.log*

@@ -98,6 +98,12 @@ export enum SlidesTemplates {
   RATING_STARS = "ratingStars",
   QUOTES = "quotes",
   BENTO_GRID = "bentoGrid",
+  TOC_SLIDE = "tocSlide",
+  CHAPTER_DIVIDER = "chapterDivider",
+  DATA_WITH_CHART = "dataWithChart",
+  CONCLUSION_SLIDE = "conclusionSlide",
+  CONTENT_WITH_INSIGHT = "contentWithInsight",
+  KPI_CARDS = "kpiCards",
 }
 
 export type Section = {
