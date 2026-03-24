@@ -1,12 +1,28 @@
 export const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "";
 
-/**
- * Drop-in fetch replacement that prepends BASE_URL and sets credentials: "include".
- */
+const TOKEN_KEY = "better-auth-token";
+
+function authHeaders(extra?: HeadersInit): HeadersInit {
+  const token = localStorage.getItem(TOKEN_KEY);
+  const headers: Record<string, string> = {};
+  if (token) headers["Authorization"] = `Bearer ${token}`;
+  if (extra) {
+    const entries =
+      extra instanceof Headers
+        ? Array.from(extra.entries())
+        : Array.isArray(extra)
+          ? extra
+          : Object.entries(extra);
+    for (const [k, v] of entries) headers[k] = v;
+  }
+  return headers;
+}
+
 export function apiFetch(path: string, options?: RequestInit): Promise<Response> {
   return fetch(`${BASE_URL}${path}`, {
     ...options,
     credentials: "include",
+    headers: authHeaders(options?.headers),
   });
 }
 
@@ -27,10 +43,10 @@ export async function apiRequest<T>(
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,
     credentials: "include",
-    headers: {
+    headers: authHeaders({
       "Content-Type": "application/json",
       ...options?.headers,
-    },
+    }),
   });
 
   if (!res.ok) {
@@ -48,9 +64,7 @@ export async function apiStream(
   const res = await fetch(`${BASE_URL}${path}`, {
     ...options,
     credentials: "include",
-    headers: {
-      ...options?.headers,
-    },
+    headers: authHeaders(options?.headers),
   });
 
   if (!res.ok) {
