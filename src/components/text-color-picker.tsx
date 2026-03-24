@@ -110,7 +110,7 @@ export function TextColorPicker({ editor }: TextColorPickerProps) {
           )}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-auto p-2" align="start" sideOffset={8}>
+      <PopoverContent onMouseDown={(e) => e.preventDefault()} className="w-auto p-2" align="start" sideOffset={8}>
         <div className="flex flex-col gap-2">
           <div className="text-xs font-medium text-muted-foreground px-1">
             {t("themeColors")}

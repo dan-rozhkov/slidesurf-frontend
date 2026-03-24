@@ -29,6 +29,7 @@ import { useScopedI18n } from "@/lib/locales/client";
 import { EditorInstance } from "@/types";
 import { ClickAtEndPlugin } from "../prosemirror-plugins/click-at-end-plugin";
 import { Extension } from "@tiptap/core";
+import { Fragment, Slice } from "prosemirror-model";
 
 const ClickAtEndExtension = Extension.create({
   name: "clickAtEnd",
@@ -116,7 +117,17 @@ export const useEditorInstance = ({
 
           event.preventDefault();
           const text = clipboard.getData("text/plain");
-          view.dispatch(view.state.tr.insertText(text));
+          const { schema } = view.state;
+          const paragraphs = text.split(/\r?\n/).map((line) => {
+            return line.length > 0
+              ? schema.nodes.paragraph.create(null, schema.text(line))
+              : schema.nodes.paragraph.create();
+          });
+          view.dispatch(
+            view.state.tr.replaceSelection(
+              new Slice(Fragment.from(paragraphs), 1, 1)
+            )
+          );
 
           return true;
         },

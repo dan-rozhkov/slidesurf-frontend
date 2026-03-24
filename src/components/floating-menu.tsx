@@ -218,6 +218,7 @@ const FloatingMenu = ({
 
   return (
     <div
+      onMouseDown={(e) => e.preventDefault()}
       className="fixed bg-white dark:bg-neutral-900 border border-border p-1 rounded-xl shadow-lg transform -translate-x-1/2 flex items-center gap-1 z-[2]"
       style={{
         top: position.top,
@@ -252,7 +253,7 @@ const FloatingMenu = ({
             : "paragraph"
         }
       >
-        <SelectTrigger className="w-[140px] text-left h-8 focus:ring-0 border-none shadow-none ring-offset-0 hover:bg-muted">
+        <SelectTrigger onMouseDown={(e) => e.stopPropagation()} className="w-[140px] text-left h-8 focus:ring-0 border-none shadow-none ring-offset-0 hover:bg-muted">
           <SelectValue placeholder="Текст" />
         </SelectTrigger>
         <SelectContent sideOffset={4}>
