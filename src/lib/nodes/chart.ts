@@ -14,6 +14,7 @@ export type ChartAttributes = {
   showGrid: boolean;
   showValues: boolean;
   stacked: boolean;
+  colors?: string[];
 };
 
 declare module "@tiptap/core" {
@@ -100,6 +101,24 @@ export const Chart = Node.create({
         parseHTML: (element) => element.getAttribute("data-chart-type"),
         renderHTML: (attributes) => ({
           "data-chart-type": attributes.chartType,
+        }),
+      },
+      colors: {
+        default: [],
+        parseHTML: (element) => {
+          const colors = element.getAttribute("data-colors");
+          if (!colors) {
+            return [];
+          }
+          try {
+            const parsed = JSON.parse(colors);
+            return Array.isArray(parsed) ? parsed : [];
+          } catch (error) {
+            return [];
+          }
+        },
+        renderHTML: (attributes) => ({
+          "data-colors": JSON.stringify(attributes.colors || []),
         }),
       },
     };

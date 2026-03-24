@@ -16,6 +16,7 @@ import {
   IconChartRadar,
   IconRadar2,
 } from "@tabler/icons-react";
+import { ColorPicker } from "@/components/ui/color-picker";
 
 type ChartToolbarProps = {
   chartType: ChartType;
@@ -28,6 +29,10 @@ type ChartToolbarProps = {
   onToggleValues: () => void;
   stacked: boolean;
   onToggleStacked: () => void;
+  colors: string[];
+  onColorsChange: (colors: string[]) => void;
+  seriesCount: number;
+  themeColors: string[];
 };
 
 const chartTypes = [
@@ -53,6 +58,10 @@ export const ChartToolbar: React.FC<ChartToolbarProps> = ({
   onToggleValues,
   stacked,
   onToggleStacked,
+  colors,
+  onColorsChange,
+  seriesCount,
+  themeColors,
 }) => {
   return (
     <div className="flex flex-col gap-4 p-8 bg-accent rounded-xl">
@@ -121,6 +130,28 @@ export const ChartToolbar: React.FC<ChartToolbarProps> = ({
           </Label>
         )}
       </div>
+
+      {seriesCount > 0 && (
+        <div className="flex flex-col gap-2">
+          <h3 className="text-lg font-medium">Цвета серий</h3>
+          <div className="flex flex-wrap gap-2">
+            {Array.from({ length: seriesCount }, (_, i) => (
+              <ColorPicker
+                key={i}
+                value={colors[i] || themeColors[i % themeColors.length] || "#8884d8"}
+                onChange={(hex) => {
+                  const newColors = [...colors];
+                  while (newColors.length < i) {
+                    newColors.push(themeColors[newColors.length % themeColors.length] || "#8884d8");
+                  }
+                  newColors[i] = hex;
+                  onColorsChange(newColors);
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

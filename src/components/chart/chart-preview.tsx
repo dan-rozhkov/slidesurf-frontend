@@ -43,6 +43,7 @@ type ChartPreviewProps = {
   showGrid: boolean;
   showValues: boolean;
   stacked?: boolean;
+  colors?: string[];
 };
 
 export const ChartPreview: React.FC<ChartPreviewProps> = ({
@@ -52,17 +53,20 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
   showGrid,
   showValues,
   stacked = false,
+  colors: customColors,
 }) => {
   const presentation = useAtomValue(presentationAtom);
   const { theme } = useTheme(presentation?.themeId || null);
 
-  const COLORS = theme?.colors?.chart || [
+  const themeColors = theme?.colors?.chart || [
     "#8884d8",
     "#82ca9d",
     "#ffc658",
     "#ff7300",
     "#0088fe",
   ];
+
+  const COLORS = customColors?.length ? customColors : themeColors;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState<number | null>(null);

@@ -135,6 +135,7 @@ export const ChartView = ({
               showGrid: node.attrs.showGrid,
               showValues: node.attrs.showValues,
               stacked: node.attrs.stacked,
+              colors: node.attrs.colors || [],
             }}
             onUpdate={(state) => {
               const pos = getPos();
@@ -152,7 +153,7 @@ export const ChartView = ({
         </SheetContent>
       </Sheet>
 
-      <div className="w-full h-[16em]">
+      <div className="chart-container w-full h-[16em]">
         {isValidChartData ? (
           <ChartPreview
             data={transformDataForChart(node.attrs.data)}
@@ -161,6 +162,7 @@ export const ChartView = ({
             showGrid={node.attrs.showGrid}
             showValues={node.attrs.showValues}
             stacked={node.attrs.stacked}
+            colors={node.attrs.colors}
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-sm text-muted-foreground">

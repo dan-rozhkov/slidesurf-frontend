@@ -309,9 +309,58 @@ body {
   flex: 1;
 }
 
-/* 
+/*
+ * CHART FLEX PROPAGATION
+ * Makes charts adapt to available space instead of using fixed height.
+ * The slide content is flex-col (via use-slide-styles), so charts and their
+ * wrappers become flex items that fill remaining space.
+ */
+
+/* Columns that contain a chart grow to fill remaining slide space */
+.slide .node-columns:has([data-type="chart"]) {
+  flex: 1;
+  min-height: 0;
+}
+
+.slide .node-columns:has([data-type="chart"]) > [data-node-view-wrapper] {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide .node-columns:has([data-type="chart"]) .node-columns-view {
+  flex: 1;
+  min-height: 0;
+}
+
+.slide .node-columns:has([data-type="chart"]) .node-columns-view > [data-node-view-content-react] {
+  height: 100%;
+}
+
+.slide [data-type="column"]:has([data-type="chart"]) {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Chart wrappers fill available space (works both standalone and in columns) */
+.slide .node-chart,
+.slide .node-chart > [data-node-view-wrapper] {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide .chart-container {
+  height: auto;
+  flex: 1;
+  min-height: 0;
+}
+
+/*
  * HEADINGS
- * 
+ *
  */
 
 .slide p,

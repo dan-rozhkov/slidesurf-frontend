@@ -397,7 +397,7 @@ export default {
     agentCloseButton: "Закрыть чат с ИИ агентом",
     settings: "Настройки",
     settingsDescription: "Настройки презентации",
-    settingsOpen: "Открыть настройки",
+    settingsOpen: "Настройки презентации",
     settingsClose: "Закрыть настройки",
     fontSize: "Размер шрифта",
     play: "Показ",

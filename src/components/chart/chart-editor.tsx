@@ -11,6 +11,9 @@ import { Button } from "@/components/ui/button";
 import { Loader, Plus, Minus } from "lucide-react";
 import { transformDataForChart } from "@/lib/utils";
 import { WithTooltip } from "@/components/ui/with-tooltip";
+import { useAtomValue } from "jotai";
+import { presentationAtom } from "@/lib/hooks/use-presentation";
+import { useTheme } from "@/lib/hooks/use-theme";
 
 const defaultData: Matrix = [
   [{ value: "Фрукты" }, { value: "Количество" }],
@@ -19,26 +22,22 @@ const defaultData: Matrix = [
   [{ value: "Апельсины" }, { value: "40" }],
 ];
 
+type ChartEditorState = {
+  data: Matrix;
+  chartType: ChartType;
+  showLabels: boolean;
+  showGrid: boolean;
+  showValues: boolean;
+  stacked: boolean;
+  colors: string[];
+};
+
 export const ChartEditor = ({
   initialState,
   onUpdate,
 }: {
-  initialState: {
-    data: Matrix;
-    chartType: ChartType;
-    showLabels: boolean;
-    showGrid: boolean;
-    showValues: boolean;
-    stacked: boolean;
-  };
-  onUpdate: (state: {
-    data: Matrix;
-    chartType: ChartType;
-    showLabels: boolean;
-    showGrid: boolean;
-    showValues: boolean;
-    stacked: boolean;
-  }) => void;
+  initialState: ChartEditorState;
+  onUpdate: (state: ChartEditorState) => void;
 }) => {
   const [data, setData] = useState<Matrix>(initialState.data || defaultData);
   const [chartType, setChartType] = useState<ChartType>(
@@ -56,8 +55,21 @@ export const ChartEditor = ({
   const [stacked, setStacked] = useState<boolean>(
     initialState.stacked || false
   );
+  const [colors, setColors] = useState<string[]>(initialState.colors || []);
   const [prompt, setPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+
+  const presentation = useAtomValue(presentationAtom);
+  const { theme } = useTheme(presentation?.themeId || null);
+  const themeColors = theme?.colors?.chart || [
+    "#8884d8",
+    "#82ca9d",
+    "#ffc658",
+    "#ff7300",
+    "#0088fe",
+  ];
+
+  const seriesCount = data[0] ? Math.max(data[0].length - 1, 0) : 0;
 
   const addRow = useCallback(() => {
     setData((prevData) => {
@@ -210,6 +222,7 @@ export const ChartEditor = ({
               showGrid={showGrid}
               showValues={showValues}
               stacked={stacked}
+              colors={colors}
             />
           </div>
 
@@ -224,11 +237,15 @@ export const ChartEditor = ({
             onToggleValues={() => setShowValues((state) => !state)}
             stacked={stacked}
             onToggleStacked={() => setStacked((state) => !state)}
+            colors={colors}
+            onColorsChange={setColors}
+            seriesCount={seriesCount}
+            themeColors={themeColors}
           />
 
           <Button
             onClick={() => {
-              onUpdate({ data, chartType, showLabels, showGrid, showValues, stacked });
+              onUpdate({ data, chartType, showLabels, showGrid, showValues, stacked, colors });
             }}
           >
             Сохранить
