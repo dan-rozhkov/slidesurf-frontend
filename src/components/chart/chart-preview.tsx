@@ -27,6 +27,7 @@ import { useAtomValue } from "jotai";
 import { presentationAtom } from "@/lib/hooks/use-presentation";
 import { useTheme } from "@/lib/hooks/use-theme";
 import { ChartType } from "@/types";
+import { DEFAULT_CHART_COLORS } from "@/lib/constants/chart-palettes";
 import { useMemo, useRef, useState } from "react";
 import { useResizeObserver } from "@/lib/hooks/use-resize-observer";
 
@@ -58,13 +59,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
   const presentation = useAtomValue(presentationAtom);
   const { theme } = useTheme(presentation?.themeId || null);
 
-  const themeColors = theme?.colors?.chart || [
-    "#8884d8",
-    "#82ca9d",
-    "#ffc658",
-    "#ff7300",
-    "#0088fe",
-  ];
+  const themeColors = theme?.colors?.chart || DEFAULT_CHART_COLORS;
 
   const COLORS = customColors?.length ? customColors : themeColors;
 

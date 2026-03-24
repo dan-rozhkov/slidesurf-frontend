@@ -5,6 +5,7 @@ import {
   Heading4,
   Text,
   Image,
+  Sparkles,
   Columns,
   SquareEqual,
   Table,
@@ -75,6 +76,13 @@ export const commands = [
     content:
       "<img src='/placeholders/image-placeholder.png' style='width: 25%;' />",
     icon: Image,
+  },
+  {
+    title: "Иконка",
+    id: "icon",
+    group: "image",
+    content: "<span data-type='icon' data-icon-name='star' data-icon-size='xl'></span>",
+    icon: Sparkles,
   },
   {
     title: "Карточка",

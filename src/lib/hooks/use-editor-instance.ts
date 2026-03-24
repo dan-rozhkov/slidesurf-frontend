@@ -23,6 +23,7 @@ import { SmartLayoutItem } from "../nodes/smart-layout-item";
 import { Flowchart } from "../nodes/flowchart";
 import { BentoGrid } from "../nodes/bento-grid";
 import { BentoGridItem } from "../nodes/bento-grid-item";
+import { IconNode } from "../nodes/icon";
 import { useIsPresentingAtom } from "./use-is-presenting";
 import { useScopedI18n } from "@/lib/locales/client";
 import { EditorInstance } from "@/types";
@@ -78,6 +79,7 @@ export const useEditorInstance = ({
         Flowchart,
         BentoGrid,
         BentoGridItem,
+        IconNode,
         Placeholder.configure({
           placeholder: ({ node, editor }) => {
             if (editor?.isEmpty) {

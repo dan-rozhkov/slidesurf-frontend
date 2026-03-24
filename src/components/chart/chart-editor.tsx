@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Loader, Plus, Minus } from "lucide-react";
 import { transformDataForChart } from "@/lib/utils";
 import { WithTooltip } from "@/components/ui/with-tooltip";
+import { DEFAULT_CHART_COLORS } from "@/lib/constants/chart-palettes";
 import { useAtomValue } from "jotai";
 import { presentationAtom } from "@/lib/hooks/use-presentation";
 import { useTheme } from "@/lib/hooks/use-theme";
@@ -57,19 +58,11 @@ export const ChartEditor = ({
   );
   const [colors, setColors] = useState<string[]>(initialState.colors || []);
   const [prompt, setPrompt] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
 
   const presentation = useAtomValue(presentationAtom);
   const { theme } = useTheme(presentation?.themeId || null);
-  const themeColors = theme?.colors?.chart || [
-    "#8884d8",
-    "#82ca9d",
-    "#ffc658",
-    "#ff7300",
-    "#0088fe",
-  ];
-
-  const seriesCount = data[0] ? Math.max(data[0].length - 1, 0) : 0;
+  const themeColors = theme?.colors?.chart || DEFAULT_CHART_COLORS;
+  const [isLoading, setIsLoading] = useState(false);
 
   const addRow = useCallback(() => {
     setData((prevData) => {
@@ -239,7 +232,6 @@ export const ChartEditor = ({
             onToggleStacked={() => setStacked((state) => !state)}
             colors={colors}
             onColorsChange={setColors}
-            seriesCount={seriesCount}
             themeColors={themeColors}
           />
 
