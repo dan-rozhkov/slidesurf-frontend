@@ -22,6 +22,25 @@ const Column = Node.create({
   // defining: true,
   // isolating: true,
 
+  addAttributes() {
+    return {
+      width: {
+        default: null,
+        parseHTML: (element: HTMLElement) => {
+          const w = element.getAttribute("data-width");
+          return w ? parseFloat(w) : null;
+        },
+        renderHTML: (attributes: Record<string, unknown>) => {
+          if (attributes.width === null || attributes.width === undefined) return {};
+          return {
+            "data-width": attributes.width,
+            style: `flex: ${attributes.width} 0 0`,
+          };
+        },
+      },
+    };
+  },
+
   addCommands() {
     return {
       setColumn:

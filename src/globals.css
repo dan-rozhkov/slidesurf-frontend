@@ -290,23 +290,9 @@ body {
   position: relative;
 }
 
-.slide .node-columns [data-type="column"]:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  right: -1em;
-  top: -1em;
-  height: calc(100% + 2em);
-  width: 1px;
-  opacity: 0;
-  @apply bg-border;
-}
-
-.slide .node-columns:hover [data-type="column"]::after {
-  opacity: 1;
-}
-
 .slide div[data-type="column"] {
   flex: 1;
+  min-width: 0;
 }
 
 /*
