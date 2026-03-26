@@ -74,22 +74,12 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
 
   const { shouldShowLabels, shouldShowLegend, shouldShowValues } =
     useMemo(() => {
-      let labels = showLabels;
-      let legend = showLabels;
-      let values = showValues;
-
-      if (containerWidth !== null && containerWidth < 300) {
-        labels = false;
-        legend = false;
-        values = false;
-      }
-
       return {
-        shouldShowLabels: labels,
-        shouldShowLegend: legend,
-        shouldShowValues: values,
+        shouldShowLabels: showLabels,
+        shouldShowLegend: showLabels,
+        shouldShowValues: showValues,
       };
-    }, [showLabels, showValues, containerWidth]);
+    }, [showLabels, showValues]);
 
   const xAxisTickProps = useMemo(() => {
     if (!shouldShowLabels || data.length <= 2) return { interval: 0 };
