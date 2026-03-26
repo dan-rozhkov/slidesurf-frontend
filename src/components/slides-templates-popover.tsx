@@ -38,7 +38,19 @@ export const SlidesTemplatesPopover = ({
           {t("editor.chooseTemplate")}
         </p>
         <div className="grid grid-cols-3 gap-3">
-          {Object.entries(SlidesTemplates).map(([key, value]) => (
+          {Object.entries(SlidesTemplates)
+            .filter(
+              ([, value]) =>
+                ![
+                  SlidesTemplates.TOC_SLIDE,
+                  SlidesTemplates.CHAPTER_DIVIDER,
+                  SlidesTemplates.DATA_WITH_CHART,
+                  SlidesTemplates.CONCLUSION_SLIDE,
+                  SlidesTemplates.CONTENT_WITH_INSIGHT,
+                  SlidesTemplates.KPI_CARDS,
+                ].includes(value as SlidesTemplates),
+            )
+            .map(([key, value]) => (
             <div
               key={key}
               className="flex flex-col gap-2 rounded-lg border border-border overflow-hidden p-1 pb-2 cursor-pointer hover:bg-accent/50 transition-colors"

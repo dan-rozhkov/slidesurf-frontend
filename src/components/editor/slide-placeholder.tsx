@@ -179,6 +179,17 @@ export const SlidePlaceholder = forwardRef<
               </ToggleGroupItem>
               {Object.values(SlidesTemplates)
                 .slice(1)
+                .filter(
+                  (t) =>
+                    ![
+                      SlidesTemplates.TOC_SLIDE,
+                      SlidesTemplates.CHAPTER_DIVIDER,
+                      SlidesTemplates.DATA_WITH_CHART,
+                      SlidesTemplates.CONCLUSION_SLIDE,
+                      SlidesTemplates.CONTENT_WITH_INSIGHT,
+                      SlidesTemplates.KPI_CARDS,
+                    ].includes(t),
+                )
                 .reverse()
                 .map((template) => (
                   <ToggleGroupItem

@@ -820,10 +820,4 @@ export const SLIDE_TEMPLATES_FOR_GENERATION = [
   statistics,
   bigNumbers,
   bentoGrid,
-  tocSlide,
-  chapterDivider,
-  dataWithChart,
-  conclusionSlide,
-  contentWithInsight,
-  kpiCards,
 ];
