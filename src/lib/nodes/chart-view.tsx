@@ -26,6 +26,7 @@ import {
   Sheet,
 } from "@/components/ui/sheet";
 import { ChartEditor } from "@/components/chart/chart-editor";
+import { useIsSlidePreview } from "@/lib/contexts/slide-preview-context";
 
 export const ChartView = ({
   editor,
@@ -34,6 +35,7 @@ export const ChartView = ({
   selected,
 }: NodeViewProps) => {
   const isEditable = editor.isEditable;
+  const isPreview = useIsSlidePreview();
   const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const isValidChartData =
@@ -158,9 +160,9 @@ export const ChartView = ({
           <ChartPreview
             data={transformDataForChart(node.attrs.data)}
             chartType={node.attrs.chartType as ChartType}
-            showLabels={node.attrs.showLabels}
-            showGrid={node.attrs.showGrid}
-            showValues={node.attrs.showValues}
+            showLabels={isPreview ? false : node.attrs.showLabels}
+            showGrid={isPreview ? false : node.attrs.showGrid}
+            showValues={isPreview ? false : node.attrs.showValues}
             stacked={node.attrs.stacked}
             colors={node.attrs.colors}
           />

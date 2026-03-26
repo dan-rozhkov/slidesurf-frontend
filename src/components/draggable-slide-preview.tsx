@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useI18n } from "@/lib/locales/client";
 import { useTheme } from "@/lib/hooks/use-theme";
+import { SlidePreviewContext } from "@/lib/contexts/slide-preview-context";
 
 export const DraggableSlidePreview = ({
   slide,
@@ -107,15 +108,17 @@ export const DraggableSlidePreview = ({
         </DropdownMenu>
       </div>
       <div className="pointer-events-none">
-        <SlideWrapper
-          slide={slide}
-          onUpdate={() => {}}
-          isActive={false}
-          isEditable={false}
-          isPresenting={true}
-          ref={null}
-          theme={theme}
-        />
+        <SlidePreviewContext.Provider value={true}>
+          <SlideWrapper
+            slide={slide}
+            onUpdate={() => {}}
+            isActive={false}
+            isEditable={false}
+            isPresenting={true}
+            ref={null}
+            theme={theme}
+          />
+        </SlidePreviewContext.Provider>
       </div>
       <div className="absolute bottom-2 right-2 z-10 bg-background/80 backdrop-blur-sm rounded-md px-2 py-1 text-xs font-medium text-foreground/70">
         {index + 1}
