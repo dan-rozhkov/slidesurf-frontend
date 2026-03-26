@@ -145,6 +145,7 @@ export const ColumnsView = ({
       editor
         .chain()
         .command(({ tr }) => {
+          tr.setMeta("addToHistory", false);
           setColumnWidths(tr, pos, currentNode, (index) => {
             if (index === handleIndex) return roundedLeft;
             if (index === handleIndex + 1) return roundedRight;
@@ -156,6 +157,23 @@ export const ColumnsView = ({
     };
 
     const onMouseUp = () => {
+      const state = dragStateRef.current;
+      if (state) {
+        // Commit final widths to history as a single undoable step
+        const pos = getPos();
+        const currentNode = editor.state.doc.nodeAt(pos);
+        if (currentNode) {
+          editor
+            .chain()
+            .command(({ tr }) => {
+              setColumnWidths(tr, pos, currentNode, (index) =>
+                currentNode.content.content[index].attrs.width
+              );
+              return true;
+            })
+            .run();
+        }
+      }
       dragStateRef.current = null;
       setIsDragging(false);
     };

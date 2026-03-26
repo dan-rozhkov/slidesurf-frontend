@@ -90,6 +90,17 @@ export const useSlideActions = () => {
     });
   };
 
+  const updateSlideImageWidth = (slideId: string, layoutImageWidth: number) => {
+    const updatedSlides = presentationAtom.slides.map((slide) =>
+      slide.id === slideId ? { ...slide, layoutImageWidth } : slide
+    );
+
+    setPresentationAtom({
+      ...presentationAtom,
+      slides: updatedSlides as Slide[],
+    });
+  };
+
   const updateSlideContent = (slideId: string, content: string) => {
     const updatedSlides = presentationAtom.slides.map((slide) =>
       slide.id === slideId ? { ...slide, content } : slide
@@ -184,6 +195,7 @@ export const useSlideActions = () => {
 
   return {
     deleteSlideImage,
+    updateSlideImageWidth,
     updateSlideContent,
     updateSlideContentWithTemplate,
     getSlideTemplateContent,

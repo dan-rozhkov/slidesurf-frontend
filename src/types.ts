@@ -45,6 +45,7 @@ export type Slide = {
   backgroundImageUrl?: string;
   layout?: SlideLayout;
   layoutImageUrl?: string;
+  layoutImageWidth?: number;
   isLoadingLayoutImage?: boolean;
   index?: number;
 };

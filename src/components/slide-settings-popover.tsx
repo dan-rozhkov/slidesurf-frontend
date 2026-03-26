@@ -10,8 +10,10 @@ import {
   ArrowUpToLine,
   ArrowDownToLine,
   FoldVertical,
+  RotateCcw,
 } from "lucide-react";
-import { Slide, SlideVerticalAlign } from "@/types";
+import { Slide, SlideLayout, SlideVerticalAlign } from "@/types";
+import { useSlideActions } from "@/lib/actions/slide.client";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { useScopedI18n } from "@/lib/locales/client";
 import {
@@ -40,6 +42,11 @@ export default function SlideSettingsPopover({
   const t = useScopedI18n("editor");
   const [presentation] = usePresentationAtom();
   const { theme } = useTheme(presentation?.themeId || null);
+  const { updateSlideImageWidth } = useSlideActions();
+
+  const isSideImage =
+    slide.layout === SlideLayout.LEFT_IMAGE ||
+    slide.layout === SlideLayout.RIGHT_IMAGE;
 
   return (
     <Popover>
@@ -193,6 +200,26 @@ export default function SlideSettingsPopover({
             </Sheet>
           </div>
         </div>
+
+        {isSideImage && slide.layoutImageWidth != null && (
+          <div className="grid grid-cols-2 gap-2 items-center">
+            <div className="flex flex-col gap-2">
+              <p className="text-sm text-neutral-500">Ширина изображения</p>
+            </div>
+
+            <div className="flex flex-col gap-2 items-end">
+              <Button
+                variant="outline"
+                size="sm"
+                className="gap-1.5"
+                onClick={() => updateSlideImageWidth(slide.id, 35)}
+              >
+                <RotateCcw className="size-3.5" strokeWidth={1.5} />
+                Сбросить
+              </Button>
+            </div>
+          </div>
+        )}
       </PopoverContent>
     </Popover>
   );
