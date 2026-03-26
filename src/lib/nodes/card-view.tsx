@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Trash2, Ellipsis, Copy } from "lucide-react";
+import { Trash2, Ellipsis, Copy, GripVertical } from "lucide-react";
 import { NodeViewWrapper, NodeViewContent, NodeViewProps } from "@tiptap/react";
 import {
   Select,
@@ -141,6 +141,14 @@ export const CardView = ({
             </div>
           </PopoverContent>
         </Popover>
+      </div>
+      <div
+        contentEditable={false}
+        draggable
+        data-drag-handle
+        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/node:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+      >
+        <GripVertical className="size-4 text-foreground" strokeWidth={1} />
       </div>
       <NodeViewContent />
     </NodeViewWrapper>
