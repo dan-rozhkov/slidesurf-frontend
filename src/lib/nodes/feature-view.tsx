@@ -170,7 +170,6 @@ export const FeatureView = ({
             </div>
             <p
               style={{
-                color: "var(--slide-foreground)",
                 fontSize: "0.9em",
                 margin: 0,
                 paddingBottom: "0.4em",

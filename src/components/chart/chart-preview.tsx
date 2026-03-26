@@ -151,12 +151,12 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
             <XAxis
               dataKey="name"
               padding={{ left: 0, right: 0 }}
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
               {...xAxisTickProps}
             />
             <YAxis
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
             {shouldShowLegend && (
@@ -182,7 +182,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
                     position={stacked ? "center" : "top"}
                     style={{
                       fontSize: "0.7em",
-                      fill: stacked ? "#fff" : theme?.colors?.foreground,
+                      fill: stacked ? "#fff" : "var(--slide-foreground)",
                     }}
                   />
                 )}
@@ -207,7 +207,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
 
             <XAxis
               type="number"
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
 
@@ -216,7 +216,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
               dataKey="name"
               width={shouldReserveYAxisSpace ? yAxisReservedWidth : 0}
               tickMargin={8}
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
 
@@ -246,7 +246,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
                     position={stacked ? "center" : "right"}
                     style={{
                       fontSize: "0.7em",
-                      fill: stacked ? "#fff" : theme?.colors?.foreground,
+                      fill: stacked ? "#fff" : "var(--slide-foreground)",
                     }}
                   />
                 )}
@@ -270,12 +270,12 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
 
             <XAxis
               dataKey="name"
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
               {...xAxisTickProps}
             />
             <YAxis
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
             {shouldShowLegend && (
@@ -303,7 +303,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
                     position="top"
                     style={{
                       fontSize: "0.7em",
-                      fill: theme?.colors?.foreground,
+                      fill: "var(--slide-foreground)",
                     }}
                   />
                 )}
@@ -399,12 +399,12 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
             {showGrid && <CartesianGrid strokeDasharray="3 3" />}
             <XAxis
               dataKey="name"
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
               {...xAxisTickProps}
             />
             <YAxis
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
             {shouldShowLegend && (
@@ -432,7 +432,7 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
                     position="top"
                     style={{
                       fontSize: "0.7em",
-                      fill: theme?.colors?.foreground,
+                      fill: "var(--slide-foreground)",
                     }}
                   />
                 )}
@@ -457,11 +457,11 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
             {showGrid && <PolarGrid />}
             <PolarAngleAxis
               dataKey="name"
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
             />
             <PolarRadiusAxis
               tick={{
-                fill: theme?.colors?.foreground,
+                fill: "var(--slide-foreground)",
                 fontSize: "0.7em",
               }}
             />
@@ -571,12 +571,12 @@ export const ChartPreview: React.FC<ChartPreviewProps> = ({
             )}
             <XAxis
               dataKey="name"
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
               {...xAxisTickProps}
             />
             <YAxis
-              tick={{ fill: theme?.colors?.foreground, fontSize: "0.7em" }}
+              tick={{ fill: "var(--slide-foreground)", fontSize: "0.7em" }}
               hide={!shouldShowLabels}
             />
             <Bar dataKey="value" maxBarSize={15} isAnimationActive={false}>

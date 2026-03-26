@@ -152,7 +152,6 @@ export const TimelineItemView = ({
               <h4 className="font-bold text-lg">{attrs.title}</h4>
               <p
                 style={{
-                  color: "var(--slide-foreground)",
                   fontSize: "0.9em",
                   margin: 0,
                 }}

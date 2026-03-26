@@ -165,6 +165,16 @@ const ThemeInit = () => {
               .join("\n")
           : ""}
       }
+
+      ${theme?.colors?.themeLayouts
+        ? Object.entries(theme.colors.themeLayouts)
+            .filter(([, settings]) => settings.colors?.foreground)
+            .map(
+              ([layout, settings]) =>
+                `.slide[data-layout="${layout}"] { --slide-foreground: ${settings.colors!.foreground}; }`
+            )
+            .join("\n")
+        : ""}
     `}</style>
   );
 };
