@@ -12,6 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useState, useCallback, useMemo, useRef } from "react";
 import { cn } from "../utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import {
   Popover,
   PopoverContent,
@@ -155,6 +156,7 @@ export const FlowchartView = ({
   selected,
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
 
   // Use refs to avoid stale closures in callbacks
   const editorRef = useRef(editor);
@@ -270,6 +272,7 @@ export const FlowchartView = ({
       data-type="flowchart"
       className={cn(
         "relative group/flowchart hover:outline outline-1 hover:outline-border rounded-md",
+        hasFocus && "outline outline-border",
         isFocused || selected
           ? "outline outline-primary outline-2 hover:outline-primary"
           : ""
@@ -279,7 +282,7 @@ export const FlowchartView = ({
         contentEditable={false}
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/flowchart:opacity-100",
-          (isFocused || selected) && "opacity-100"
+          (isFocused || selected || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>
@@ -336,7 +339,7 @@ export const FlowchartView = ({
         contentEditable={false}
         draggable
         data-drag-handle
-        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/flowchart:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+        className={cn("absolute top-0 left-0 -translate-x-full opacity-0 group-hover/flowchart:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2", hasFocus && "opacity-100")}
       >
         <GripVertical className="size-4" strokeWidth={1} />
       </div>

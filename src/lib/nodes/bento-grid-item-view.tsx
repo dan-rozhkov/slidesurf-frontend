@@ -9,6 +9,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import { WithTooltip } from "@/components/ui/with-tooltip";
 import {
   Minus,
@@ -34,6 +35,7 @@ export const BentoGridItemView = ({
   selected,
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
   const [, setSheetVisibility] = useSheetVisibility();
   const t = useScopedI18n("actions");
   const tEditor = useScopedI18n("editor");
@@ -274,7 +276,7 @@ export const BentoGridItemView = ({
       data-row-start={rowStart}
       className={cn(
         "bento-grid-item relative group/bento-item",
-        (isFocused || selected) && "z-10",
+        (isFocused || selected || hasFocus) && "z-10",
         backgroundImageUrl && "has-background-image"
       )}
       style={itemStyle}
@@ -283,7 +285,7 @@ export const BentoGridItemView = ({
       <div
         className={cn(
           "absolute top-1.5 right-1.5 opacity-0 group-hover/bento-item:opacity-100 z-[3] transition-opacity",
-          (isFocused || selected) && "opacity-100"
+          (isFocused || selected || hasFocus) && "opacity-100"
         )}
         contentEditable={false}
       >

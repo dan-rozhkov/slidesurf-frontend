@@ -14,6 +14,7 @@ import { Ellipsis, Trash2, SquarePen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import {
   Popover,
   PopoverContent,
@@ -32,6 +33,7 @@ export const FeatureView = ({
 }: NodeViewProps) => {
   const attrs = node.attrs as FeatureAttributes;
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [title, setTitle] = useState(attrs.title);
   const [content, setContent] = useState(attrs.content);
@@ -83,13 +85,14 @@ export const FeatureView = ({
     <NodeViewWrapper
       className={cn(
         "group/feature relative",
+        hasFocus && "outline outline-border",
         isFocused && "outline outline-primary outline-2 hover:outline-primary"
       )}
     >
       <div
         className={cn(
           "absolute top-[-1.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/feature:opacity-100",
-          isFocused && "opacity-100"
+          (isFocused || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>

@@ -5,6 +5,7 @@ import { Ellipsis, Plus, Trash2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { cn } from "../utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import {
   Popover,
   PopoverContent,
@@ -18,6 +19,7 @@ export const FeaturesListView = ({
   selected,
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
 
   const deleteFeaturesList = () => {
     const pos = getPos();
@@ -49,6 +51,7 @@ export const FeaturesListView = ({
       data-type="features-list"
       className={cn(
         "relative group/features-list",
+        hasFocus && "outline outline-border",
         isFocused || selected
           ? "outline outline-primary outline-2 hover:outline-primary"
           : ""
@@ -57,7 +60,7 @@ export const FeaturesListView = ({
       <div
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/features-list:opacity-100",
-          isFocused || (selected && "opacity-100")
+          (isFocused || selected || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>

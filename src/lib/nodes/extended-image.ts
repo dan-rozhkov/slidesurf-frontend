@@ -2,6 +2,16 @@ import { Image } from "@tiptap/extension-image";
 import { ReactNodeViewRenderer } from "@tiptap/react";
 import ImageNodeView from "./image-view";
 
+const parsePercentageStyle = (style: string | null, property: string) => {
+  if (!style) return null;
+
+  const match = style.match(
+    new RegExp(`${property}:\\s*(\\d+(?:\\.\\d+)?)%`)
+  );
+
+  return match ? match[1] : null;
+};
+
 declare module "@tiptap/core" {
   interface Commands<ReturnType> {
     extendedImage: {
@@ -34,10 +44,7 @@ export const ExtendedImage = Image.extend({
       width: {
         default: null,
         parseHTML: (element) => {
-          const style = element.getAttribute("style");
-          if (!style) return null;
-          const match = style.match(/width:\s*(\d+)%/);
-          return match ? match[1] : null;
+          return parsePercentageStyle(element.getAttribute("style"), "width");
         },
         renderHTML: (attributes) => ({
           style: attributes.width ? `width: ${attributes.width}%` : null,
@@ -46,10 +53,7 @@ export const ExtendedImage = Image.extend({
       height: {
         default: null,
         parseHTML: (element) => {
-          const style = element.getAttribute("style");
-          if (!style) return null;
-          const match = style.match(/height:\s*(\d+)%/);
-          return match ? match[1] : null;
+          return parsePercentageStyle(element.getAttribute("style"), "height");
         },
         renderHTML: (attributes) => ({
           style: attributes.height ? `height: ${attributes.height}%` : null,

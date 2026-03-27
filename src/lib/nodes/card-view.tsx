@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import { Separator } from "@/components/ui/separator";
 
 export const CardView = ({
@@ -26,6 +27,7 @@ export const CardView = ({
   getPos,
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
 
   const cloneNode = () => {
     const nodeJSON = node.toJSON();
@@ -89,13 +91,14 @@ export const CardView = ({
       data-accent={node.attrs.accent ? "true" : "false"}
       className={cn(
         "group/node hover:outline outline-1 hover:outline-border",
+        hasFocus && "outline outline-border",
         isFocused && "outline outline-primary outline-2 hover:outline-primary"
       )}
     >
       <div
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/node:opacity-100",
-          isFocused && "opacity-100"
+          (isFocused || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>
@@ -146,7 +149,7 @@ export const CardView = ({
         contentEditable={false}
         draggable
         data-drag-handle
-        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/node:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+        className={cn("absolute top-0 left-0 -translate-x-full opacity-0 group-hover/node:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2", hasFocus && "opacity-100")}
       >
         <GripVertical className="size-4 text-foreground" strokeWidth={1} />
       </div>

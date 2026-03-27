@@ -12,6 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { cn, transformDataForChart } from "../utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import {
   Popover,
   PopoverContent,
@@ -37,6 +38,7 @@ export const ChartView = ({
   const isEditable = editor.isEditable;
   const isPreview = useIsSlidePreview();
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
   const [isOpen, setIsOpen] = useState(false);
   const isValidChartData =
     Array.isArray(node.attrs.data) &&
@@ -68,6 +70,7 @@ export const ChartView = ({
       data-type="chart"
       className={cn(
         "relative group/chart hover:outline outline-1 hover:outline-border rounded-md",
+        hasFocus && "outline outline-border",
         isEditable && (isFocused || selected)
           ? "outline outline-primary outline-2 hover:outline-primary"
           : ""
@@ -77,7 +80,7 @@ export const ChartView = ({
         contentEditable={false}
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/chart:opacity-100",
-          isEditable && (isFocused || selected) && "opacity-100"
+          isEditable && (isFocused || selected || hasFocus) && "opacity-100"
         )}
       >
         <Popover
@@ -177,7 +180,7 @@ export const ChartView = ({
         contentEditable={false}
         draggable
         data-drag-handle
-        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/chart:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+        className={cn("absolute top-0 left-0 -translate-x-full opacity-0 group-hover/chart:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2", hasFocus && "opacity-100")}
       >
         <GripVertical className="size-4" strokeWidth={1} />
       </div>

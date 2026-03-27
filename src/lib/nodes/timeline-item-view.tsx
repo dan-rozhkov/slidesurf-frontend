@@ -14,6 +14,7 @@ import { Ellipsis, Trash2, SquarePen } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import {
   Popover,
   PopoverContent,
@@ -31,6 +32,7 @@ export const TimelineItemView = ({
 }: NodeViewProps) => {
   const attrs = node.attrs as TimelineItemAttributes;
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [title, setTitle] = useState(attrs.title);
   const [content, setContent] = useState(attrs.content);
@@ -71,13 +73,14 @@ export const TimelineItemView = ({
     <NodeViewWrapper
       className={cn(
         "group/timeline-item relative w-full",
+        hasFocus && "outline outline-border",
         isFocused && "outline outline-primary outline-2 hover:outline-primary"
       )}
     >
       <div
         className={cn(
           "absolute top-[-1rem] left-[50%] -translate-x-[50%] opacity-0 group-hover/timeline-item:opacity-100",
-          isFocused && "opacity-100"
+          (isFocused || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>

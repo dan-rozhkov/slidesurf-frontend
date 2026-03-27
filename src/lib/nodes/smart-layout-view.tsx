@@ -31,6 +31,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import { Separator } from "@/components/ui/separator";
 import { WithTooltip } from "@/components/ui/with-tooltip";
 import { SmartLayoutType } from "./smart-layout";
@@ -43,6 +44,7 @@ export const SmartLayoutView = ({
   selected,
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
   const layoutType = node.attrs.type as SmartLayoutType;
   const countItems = node.content.content.length;
 
@@ -157,6 +159,7 @@ export const SmartLayoutView = ({
     <NodeViewWrapper
       className={cn(
         "relative group/smart-layout hover:outline outline-1 hover:outline-border rounded-md",
+        hasFocus && "outline outline-border",
         isFocused || selected
           ? "outline outline-primary outline-2 hover:outline-primary"
           : ""
@@ -166,7 +169,7 @@ export const SmartLayoutView = ({
     >
       {countItems < 6 && (
         <div
-          className="absolute opacity-0 group-hover/smart-layout:opacity-100 right-0 top-[50%] translate-x-1/2 -translate-y-1/2 z-[2]"
+          className={cn("absolute opacity-0 group-hover/smart-layout:opacity-100 right-0 top-[50%] translate-x-1/2 -translate-y-1/2 z-[2]", hasFocus && "opacity-100")}
           contentEditable={false}
         >
           <Button
@@ -183,7 +186,7 @@ export const SmartLayoutView = ({
       <div
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/smart-layout:opacity-100 z-[2]",
-          (isFocused || selected) && "opacity-100"
+          (isFocused || selected || hasFocus) && "opacity-100"
         )}
         contentEditable={false}
       >
@@ -314,7 +317,7 @@ export const SmartLayoutView = ({
         contentEditable={false}
         draggable
         data-drag-handle
-        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/smart-layout:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+        className={cn("absolute top-0 left-0 -translate-x-full opacity-0 group-hover/smart-layout:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2", hasFocus && "opacity-100")}
       >
         <GripVertical className="size-4" strokeWidth={1} />
       </div>

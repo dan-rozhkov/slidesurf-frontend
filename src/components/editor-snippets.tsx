@@ -103,6 +103,7 @@ export function EditorSnippets() {
                 variant="ghost"
                 size="icon"
                 className="p-2 w-auto h-auto relative"
+                data-command-group={group}
               >
                 <Tooltip delayDuration={300}>
                   <TooltipTrigger className="absolute top-0 left-0 w-full h-full"></TooltipTrigger>
@@ -132,6 +133,7 @@ export function EditorSnippets() {
                     variant="outline"
                     size="icon"
                     className="p-4 w-auto h-auto cursor-grab shadow-sm flex-col items-center justify-start ellipsis overflow-hidden gap-2 relative rounded-lg transition-all hover:shadow-md hover:bg-accent/50"
+                    data-command-id={command.id}
                     draggable
                     onDragStart={(event) => {
                       setOpenPopover(null);

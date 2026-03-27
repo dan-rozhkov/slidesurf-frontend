@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Ellipsis, Copy, Trash2, Plus, GripVertical } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import { useState } from "react";
+import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 
 export const TableView = ({ editor, getPos, node }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
+  const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
 
   const addColumnAtRight = () => {
     editor.chain().focus().setNodeSelection(getPos()).run();
@@ -47,10 +49,11 @@ export const TableView = ({ editor, getPos, node }: NodeViewProps) => {
       data-type="table"
       className={cn(
         "relative group/table",
+        hasFocus && "outline outline-border",
         isFocused && "outline outline-primary outline-2 hover:outline-primary"
       )}
     >
-      <div className="absolute opacity-0 group-hover/table:opacity-100 right-0 top-0 bottom-0 translate-x-full z-[2]">
+      <div className={cn("absolute opacity-0 group-hover/table:opacity-100 right-0 top-0 bottom-0 translate-x-full z-[2]", hasFocus && "opacity-100")}>
         <Button
           variant="outline"
           size="icon"
@@ -61,7 +64,7 @@ export const TableView = ({ editor, getPos, node }: NodeViewProps) => {
         </Button>
       </div>
 
-      <div className="absolute opacity-0 group-hover/table:opacity-100 left-0 bottom-0 right-0 translate-y-full z-[2]">
+      <div className={cn("absolute opacity-0 group-hover/table:opacity-100 left-0 bottom-0 right-0 translate-y-full z-[2]", hasFocus && "opacity-100")}>
         <Button
           variant="outline"
           size="icon"
@@ -75,7 +78,7 @@ export const TableView = ({ editor, getPos, node }: NodeViewProps) => {
       <div
         className={cn(
           "absolute top-[-0.75em] left-[50%] -translate-x-[50%] opacity-0 group-hover/table:opacity-100",
-          isFocused && "opacity-100"
+          (isFocused || hasFocus) && "opacity-100"
         )}
       >
         <Popover onOpenChange={(state) => setIsFocused(state)}>
@@ -114,7 +117,7 @@ export const TableView = ({ editor, getPos, node }: NodeViewProps) => {
         contentEditable={false}
         draggable
         data-drag-handle
-        className="absolute top-0 left-0 -translate-x-full opacity-0 group-hover/table:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2"
+        className={cn("absolute top-0 left-0 -translate-x-full opacity-0 group-hover/table:opacity-100 bg-background rounded-sm border border-border cursor-grab active:cursor-grabbing px-0.5 py-1.5 -ml-2", hasFocus && "opacity-100")}
       >
         <GripVertical className="size-4" strokeWidth={1} />
       </div>
