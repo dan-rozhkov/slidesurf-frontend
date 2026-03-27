@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useNodeHasFocus } from "@/lib/hooks/use-node-has-focus";
 import { Separator } from "@/components/ui/separator";
+import { useScopedI18n } from "@/lib/locales/client";
 
 export const CardView = ({
   deleteNode,
@@ -28,6 +29,7 @@ export const CardView = ({
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
+  const t = useScopedI18n("nodes");
 
   const cloneNode = () => {
     const nodeJSON = node.toJSON();
@@ -124,11 +126,11 @@ export const CardView = ({
                 }
               >
                 <SelectTrigger className="w-[140px] text-left h-8 focus:ring-0 border-none shadow-none ring-offset-0 hover:bg-muted">
-                  <SelectValue placeholder="Тип карточки" />
+                  <SelectValue placeholder={t("cardType")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="true">Акцентная</SelectItem>
-                  <SelectItem value="false">Обычная</SelectItem>
+                  <SelectItem value="true">{t("accent")}</SelectItem>
+                  <SelectItem value="false">{t("regular")}</SelectItem>
                 </SelectContent>
               </Select>
 

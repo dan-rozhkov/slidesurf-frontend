@@ -100,7 +100,7 @@ export default function ContentAIPopover({
           <Input
             ref={inputRef}
             type="text"
-            placeholder="Напишите, что нужно сделать..."
+            placeholder={t("aiCustomPromptPlaceholder")}
             className="border-none bg-muted focus-visible:ring-0 h-9"
             value={customPrompt}
             onChange={(e) => setCustomPrompt(e.target.value)}

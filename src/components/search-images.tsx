@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { apiFetch } from "@/api/client";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -25,11 +25,6 @@ type Image = {
   thumb: string;
 };
 
-const schema = z.object({
-  query: z.string().min(1, { message: "Текст не может быть пустым" }),
-  provider: z.enum(["unsplash", "freepik"]),
-});
-
 export const SearchImages = ({
   onImageSelect,
 }: {
@@ -39,6 +34,15 @@ export const SearchImages = ({
   const [isLoading, setIsLoading] = useState(false);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const t = useScopedI18n("editor");
+
+  const schema = useMemo(
+    () =>
+      z.object({
+        query: z.string().min(1, { message: t("searchQueryRequired") }),
+        provider: z.enum(["unsplash", "freepik"]),
+      }),
+    [t]
+  );
 
   const { register, handleSubmit, setValue, getValues, watch } = useForm<
     z.infer<typeof schema>

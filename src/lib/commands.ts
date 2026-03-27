@@ -35,42 +35,36 @@ import {
 
 export const commands = [
   {
-    title: "Заголовок 1",
     id: "h1",
     group: "text",
     content: "<h1></h1>",
     icon: Heading1,
   },
   {
-    title: "Заголовок 2",
     id: "h2",
     group: "text",
     content: "<h2></h2>",
     icon: Heading2,
   },
   {
-    title: "Заголовок 3",
     id: "h3",
     group: "text",
     content: "<h3></h3>",
     icon: Heading3,
   },
   {
-    title: "Заголовок 4",
     id: "h4",
     group: "text",
     content: "<h4></h4>",
     icon: Heading4,
   },
   {
-    title: "Обычный текст",
     id: "paragraph",
     group: "text",
     content: "<p></p>",
     icon: Text,
   },
   {
-    title: "Изображение",
     id: "image",
     group: "image",
     content:
@@ -78,21 +72,18 @@ export const commands = [
     icon: Image,
   },
   {
-    title: "Иконка",
     id: "icon",
     group: "image",
     content: "<span data-type='icon' data-icon-name='star' data-icon-size='xl'></span>",
     icon: Sparkles,
   },
   {
-    title: "Карточка",
     id: "card",
     group: "layout",
     content: "<div data-type='card'><p></p></div>",
     icon: SquareEqual,
   },
   {
-    title: "Колонки",
     id: "columns",
     group: "layout",
     content:
@@ -100,7 +91,6 @@ export const commands = [
     icon: Columns,
   },
   {
-    title: "Бенто-сетка",
     id: "bento-grid",
     group: "layout",
     content:
@@ -108,7 +98,6 @@ export const commands = [
     icon: LayoutGrid,
   },
   {
-    title: "Таблица",
     id: "table",
     group: "table",
     content:
@@ -116,7 +105,6 @@ export const commands = [
     icon: Table,
   },
   {
-    title: "Столбчатый график",
     id: "chart-bar",
     group: "diagram",
     content:
@@ -124,7 +112,6 @@ export const commands = [
     icon: ChartColumnBig,
   },
   {
-    title: "Горизонтальный график",
     id: "chart-h-bar",
     group: "diagram",
     content:
@@ -132,7 +119,6 @@ export const commands = [
     icon: ChartBarBig,
   },
   {
-    title: "Линейный график",
     id: "chart-line",
     group: "diagram",
     content:
@@ -140,7 +126,6 @@ export const commands = [
     icon: ChartLine,
   },
   {
-    title: "Круговая диаграмма",
     id: "chart-pie",
     group: "diagram",
     content:
@@ -148,7 +133,6 @@ export const commands = [
     icon: ChartPie,
   },
   {
-    title: "Кольцевая диаграмма",
     id: "chart-donut",
     group: "diagram",
     content:
@@ -156,7 +140,6 @@ export const commands = [
     icon: IconChartDonut3,
   },
   {
-    title: "График площади",
     id: "chart-area",
     group: "diagram",
     content:
@@ -164,7 +147,6 @@ export const commands = [
     icon: ChartArea,
   },
   {
-    title: "Радар-диаграмма",
     id: "chart-radar",
     group: "diagram",
     content:
@@ -172,7 +154,6 @@ export const commands = [
     icon: IconChartRadar,
   },
   {
-    title: "Радиальный график",
     id: "chart-radial-bar",
     group: "diagram",
     content:
@@ -180,7 +161,6 @@ export const commands = [
     icon: IconRadar2,
   },
   {
-    title: "Список преимуществ",
     id: "features-list",
     group: "layout",
     content:
@@ -188,7 +168,6 @@ export const commands = [
     icon: List,
   },
   {
-    title: "Таймлайн",
     id: "timeline",
     group: "layout",
     content:
@@ -196,7 +175,6 @@ export const commands = [
     icon: Calendar,
   },
   {
-    title: "Стрелки",
     id: "smart-layout-arrows",
     group: "layout",
     content:
@@ -204,7 +182,6 @@ export const commands = [
     icon: ArrowRight,
   },
   {
-    title: "Стрелки вниз",
     id: "smart-layout-arrows-down",
     group: "layout",
     content:
@@ -212,7 +189,6 @@ export const commands = [
     icon: ArrowDown,
   },
   {
-    title: "Статистика",
     id: "smart-layout-statistics",
     group: "layout",
     content:
@@ -220,7 +196,6 @@ export const commands = [
     icon: BarChart3,
   },
   {
-    title: "Большие числа",
     id: "smart-layout-big-numbers",
     group: "layout",
     content:
@@ -228,7 +203,6 @@ export const commands = [
     icon: Percent,
   },
   {
-    title: "Рейтинг",
     id: "smart-layout-rating-stars",
     group: "layout",
     content:
@@ -236,7 +210,6 @@ export const commands = [
     icon: Star,
   },
   {
-    title: "Пирамида",
     id: "smart-layout-pyramid",
     group: "layout",
     content:
@@ -244,7 +217,6 @@ export const commands = [
     icon: Triangle,
   },
   {
-    title: "Воронка",
     id: "smart-layout-funnel",
     group: "layout",
     content:
@@ -252,7 +224,6 @@ export const commands = [
     icon: Filter,
   },
   {
-    title: "Цитаты",
     id: "smart-layout-quotes",
     group: "layout",
     content:
@@ -260,7 +231,6 @@ export const commands = [
     icon: Quote,
   },
   {
-    title: "Иерархическое дерево",
     id: "flowchart",
     group: "diagram",
     content:

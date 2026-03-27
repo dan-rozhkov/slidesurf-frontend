@@ -8,6 +8,7 @@ import {
 } from "@/lib/utils/lucide-icon-map";
 import { cn } from "@/lib/utils";
 import { Search } from "lucide-react";
+import { useScopedI18n } from "@/lib/locales/client";
 import {
   Select,
   SelectContent,
@@ -81,6 +82,7 @@ export function IconPicker({
 }) {
   const [query, setQuery] = useState("");
   const allIcons = getIconNames();
+  const t = useScopedI18n("iconPicker");
 
   const filteredIcons = useMemo(() => {
     if (!query.trim()) return POPULAR_ICONS;
@@ -96,7 +98,7 @@ export function IconPicker({
           <Input
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search icons..."
+            placeholder={t("searchPlaceholder")}
             className="h-8 pl-7 text-sm"
             autoFocus
           />
@@ -133,7 +135,7 @@ export function IconPicker({
         ))}
         {filteredIcons.length === 0 && (
           <p className="col-span-6 text-sm text-muted-foreground text-center py-4">
-            No icons found
+            {t("noResults")}
           </p>
         )}
       </div>

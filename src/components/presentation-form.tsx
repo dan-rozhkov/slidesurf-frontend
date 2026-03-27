@@ -86,7 +86,7 @@ export function PresentationForm({
         });
 
         if (!response.ok) {
-          throw new Error("Ошибка при загрузке файла");
+          throw new Error(t("fileUploadError"));
         }
 
         const { url } = await response.json();
@@ -96,10 +96,10 @@ export function PresentationForm({
             !attachment.url ? { ...attachment, url } : attachment
           )
         );
-        toast.success("Файл успешно загружен");
+        toast.success(t("fileUploadSuccess"));
       } catch (error) {
         console.error(error);
-        toast.error("Ошибка при загрузке файла");
+        toast.error(t("fileUploadError"));
         setAttachments([]);
       }
     },
@@ -370,7 +370,7 @@ export function PresentationForm({
               value={lang}
             >
               <SelectTrigger className="border-none rounded-full bg-accent py-1">
-                <SelectValue placeholder="Язык" />
+                <SelectValue placeholder={t("languagePlaceholder")} />
               </SelectTrigger>
 
               <SelectContent>

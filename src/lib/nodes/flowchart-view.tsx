@@ -20,6 +20,7 @@ import {
 } from "@/components/ui/popover";
 import { FlowchartNode } from "./flowchart";
 import { FlowchartNodeEditor } from "./flowchart-node-editor";
+import { useScopedI18n } from "@/lib/locales/client";
 
 // Migration function to convert old label format to new content format
 const migrateNode = (node: any): FlowchartNode => {
@@ -66,6 +67,7 @@ const FlowchartTree = ({
   canDeleteRoot,
   isEditable,
   path = [],
+  labels,
 }: {
   nodes: FlowchartNode[];
   onNodeUpdate: (path: number[], newContent: string) => void;
@@ -74,6 +76,7 @@ const FlowchartTree = ({
   canDeleteRoot: boolean;
   isEditable: boolean;
   path?: number[];
+  labels: { addChildNode: string; deleteNode: string };
 }) => {
   return (
     <ul>
@@ -100,7 +103,7 @@ const FlowchartTree = ({
                       e.stopPropagation();
                       onAddChild(currentPath);
                     }}
-                    title="Добавить дочерний узел"
+                    title={labels.addChildNode}
                     contentEditable={false}
                     type="button"
                   >
@@ -116,7 +119,7 @@ const FlowchartTree = ({
                         e.stopPropagation();
                         onDeleteNode(currentPath);
                       }}
-                      title="Удалить узел"
+                      title={labels.deleteNode}
                       contentEditable={false}
                       type="button"
                     >
@@ -140,6 +143,7 @@ const FlowchartTree = ({
                 canDeleteRoot={canDeleteRoot}
                 isEditable={isEditable}
                 path={currentPath}
+                labels={labels}
               />
             )}
           </li>
@@ -157,6 +161,7 @@ export const FlowchartView = ({
 }: NodeViewProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
+  const t = useScopedI18n("nodes");
 
   // Use refs to avoid stale closures in callbacks
   const editorRef = useRef(editor);
@@ -225,7 +230,7 @@ export const FlowchartView = ({
     (path: number[]) => {
       updateTreeData((treeData) => {
         if (path.length === 0) {
-          return [...treeData, { content: "<p>Новый узел</p>" }];
+          return [...treeData, { content: `<p>${t("newNode")}</p>` }];
         }
 
         const node = getNodeAtPath(treeData, path);
@@ -233,7 +238,7 @@ export const FlowchartView = ({
           if (!node.children) {
             node.children = [];
           }
-          node.children.push({ content: "<p>Новый узел</p>" });
+          node.children.push({ content: `<p>${t("newNode")}</p>` });
         }
         return treeData;
       });
@@ -326,10 +331,11 @@ export const FlowchartView = ({
               onDeleteNode={deleteNode}
               canDeleteRoot={canDeleteRoot}
               isEditable={editor.isEditable}
+              labels={{ addChildNode: t("addChildNode"), deleteNode: t("deleteNode") }}
             />
           ) : (
             <div className="text-muted-foreground text-center py-8">
-              Нет данных для отображения
+              {t("noData")}
             </div>
           )}
         </div>

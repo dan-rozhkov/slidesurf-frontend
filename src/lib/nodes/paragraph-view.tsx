@@ -18,9 +18,12 @@ import { NodeViewWrapper, NodeViewContent, NodeViewProps } from "@tiptap/react";
 import { Plus } from "lucide-react";
 import { useState, Fragment } from "react";
 import { commands } from "../commands";
+import { useScopedI18n } from "@/lib/locales/client";
 
 export const ParagraphView = ({ node, editor }: NodeViewProps) => {
   const [open, setOpen] = useState(false);
+  const t = useScopedI18n("nodes");
+  const tCmd = useScopedI18n("commands");
 
   const handleInsertContent = (id: string) => {
     const command = commands.find((command) => command.id === id);
@@ -51,19 +54,19 @@ export const ParagraphView = ({ node, editor }: NodeViewProps) => {
               className="w-auto p-0.5"
             >
               <Command>
-                <CommandInput placeholder="Искать..." />
+                <CommandInput placeholder={t("search")} />
                 <CommandList>
-                  <CommandEmpty>Ничего не найдено.</CommandEmpty>
+                  <CommandEmpty>{t("nothingFound")}</CommandEmpty>
                   {["text", "image", "layout"].map((group, index) => (
                     <Fragment key={group}>
                       {index > 0 && <CommandSeparator />}
                       <CommandGroup
                         heading={
                           group === "text"
-                            ? "Текст"
+                            ? t("groupText")
                             : group === "image"
-                            ? "Изображение"
-                            : "Макет"
+                            ? t("groupImage")
+                            : t("groupLayout")
                         }
                       >
                         {commands
@@ -71,14 +74,14 @@ export const ParagraphView = ({ node, editor }: NodeViewProps) => {
                           .map((command) => (
                             <CommandItem
                               key={command.id}
-                              value={command.title}
+                              value={tCmd(command.id)}
                               onSelect={() => handleInsertContent(command.id)}
                             >
                               <command.icon
                                 className="size-4"
                                 strokeWidth={1.5}
                               />
-                              <span>{command.title}</span>
+                              <span>{tCmd(command.id)}</span>
                             </CommandItem>
                           ))}
                       </CommandGroup>

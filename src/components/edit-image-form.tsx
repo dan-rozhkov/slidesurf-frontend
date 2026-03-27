@@ -17,18 +17,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Slide } from "@/types";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useScopedI18n } from "@/lib/locales/client";
 import { useModels } from "@/lib/hooks/use-models";
 import { useUserSubscription } from "@/lib/hooks/use-user-subscription";
 import { useSubscriptionDialog } from "@/lib/hooks/use-subscription-dialog";
 
-const formSchema = z.object({
-  url: z.string().url("Неверный формат URL"),
-  prompt: z.string().optional(),
-});
-
-type Inputs = z.infer<typeof formSchema>;
+type Inputs = { url: string; prompt?: string };
 
 type ImageEditFormProps = {
   currentSlide?: Slide;
@@ -49,7 +44,17 @@ export const EditImageForm = ({
 }: ImageEditFormProps) => {
   // Use external imageUrl if provided, otherwise use currentSlide's layoutImageUrl
   const effectiveImageUrl = externalImageUrl ?? currentSlide?.layoutImageUrl ?? "";
-  
+  const t = useScopedI18n("editor");
+
+  const formSchema = useMemo(
+    () =>
+      z.object({
+        url: z.string().url(t("invalidUrlFormat")),
+        prompt: z.string().optional(),
+      }),
+    [t]
+  );
+
   const { register, handleSubmit, watch, setValue } = useForm<Inputs>({
     resolver: zodResolver(formSchema),
     values: {
@@ -57,7 +62,6 @@ export const EditImageForm = ({
       prompt: "",
     },
   });
-  const t = useScopedI18n("editor");
   const { data: subscription } = useUserSubscription();
   const [, setSubscriptionDialogOpen] = useSubscriptionDialog();
   const { imageModels } = useModels();
@@ -151,7 +155,7 @@ export const EditImageForm = ({
             <SelectTrigger>
               <SelectValue>
                 {imageModels.find((m) => m.id === selectedModel)
-                  ?.name || "Select model"}
+                  ?.name || t("selectModel")}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>

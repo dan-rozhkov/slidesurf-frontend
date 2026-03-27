@@ -176,7 +176,7 @@ export default function ShareDialog({
                   onValueChange={handleShare}
                 >
                   <SelectTrigger className="w-auto border-none hover:bg-accent">
-                    <SelectValue placeholder="Выберите действие" />
+                    <SelectValue placeholder={t("selectAction")} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="enable">{t("allowAccess")}</SelectItem>

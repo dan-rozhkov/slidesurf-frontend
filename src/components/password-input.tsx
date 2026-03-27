@@ -4,6 +4,7 @@ import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
+import { useI18n } from "@/lib/locales/client";
 
 type PasswordInputProps = {
   value: string;
@@ -29,6 +30,7 @@ export default function PasswordInput({
   className,
 }: PasswordInputProps) {
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const t = useI18n();
 
   const toggleVisibility = () => setIsVisible((prevState) => !prevState);
 
@@ -61,7 +63,7 @@ export default function PasswordInput({
           type="button"
           onClick={toggleVisibility}
           disabled={disabled}
-          aria-label={isVisible ? "Hide password" : "Show password"}
+          aria-label={isVisible ? t("passwordInput.hidePassword") : t("passwordInput.showPassword")}
           aria-pressed={isVisible}
           aria-controls={id ? `${id}-password` : "password"}
         >

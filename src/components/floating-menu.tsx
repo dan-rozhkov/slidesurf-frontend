@@ -254,7 +254,7 @@ const FloatingMenu = ({
         }
       >
         <SelectTrigger onMouseDown={(e) => e.stopPropagation()} className="w-[140px] text-left h-8 focus:ring-0 border-none shadow-none ring-offset-0 hover:bg-muted">
-          <SelectValue placeholder="Текст" />
+          <SelectValue placeholder={t("textPlaceholder")} />
         </SelectTrigger>
         <SelectContent sideOffset={4}>
           <SelectItem value="paragraph">{t("paragraph")}</SelectItem>

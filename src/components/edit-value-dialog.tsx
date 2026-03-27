@@ -13,44 +13,11 @@ import { Label } from "@/components/ui/label";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { EditValueDialogProps } from "@/types";
+import { useScopedI18n } from "@/lib/locales/client";
 
-const dialogCopies = {
-  statistics: {
-    title: "Изменить значение",
-    description:
-      "Введите процентное значение от 0 до 100 для отображения в диаграмме",
-    inputLabel: "Значение (%)",
-    inputPlaceholder: "Введите значение от 0 до 100",
-  },
-  "big-numbers": {
-    title: "Изменить значение",
-    description: "Введите числовое значение для отображения в большом числе",
-    inputLabel: "Значение",
-    inputPlaceholder: "Введите значение",
-  },
-  "raiting-stars": {
-    title: "Изменить рейтинг",
-    description: "Введите значение рейтинга от 1 до 5 звезд",
-    inputLabel: "Рейтинг (звезды)",
-    inputPlaceholder: "Введите значение от 1 до 5",
-  },
-} as const;
-
-const valueFormSchema = z.object({
-  value: z
-    .string()
-    .min(1, "Значение обязательно")
-    .refine((val) => val.trim() !== "", "Значение не может быть пустым")
-    .refine((val) => !isNaN(Number(val)), "Должно быть числом")
-    .refine(
-      (val) => Number.isInteger(Number(val)) || Number(val) % 1 === 0,
-      "Должно быть целым числом"
-    ),
-});
-
-type ValueFormData = z.infer<typeof valueFormSchema>;
+type ValueFormData = { value: string };
 
 export const EditValueDialog = ({
   isOpen,
@@ -59,6 +26,48 @@ export const EditValueDialog = ({
   dialogType,
   initialValue,
 }: EditValueDialogProps) => {
+  const t = useScopedI18n("editValueDialog");
+
+  const dialogCopies = useMemo(
+    () => ({
+      statistics: {
+        title: t("statistics.title"),
+        description: t("statistics.description"),
+        inputLabel: t("statistics.inputLabel"),
+        inputPlaceholder: t("statistics.inputPlaceholder"),
+      },
+      "big-numbers": {
+        title: t("bigNumbers.title"),
+        description: t("bigNumbers.description"),
+        inputLabel: t("bigNumbers.inputLabel"),
+        inputPlaceholder: t("bigNumbers.inputPlaceholder"),
+      },
+      "raiting-stars": {
+        title: t("ratingStars.title"),
+        description: t("ratingStars.description"),
+        inputLabel: t("ratingStars.inputLabel"),
+        inputPlaceholder: t("ratingStars.inputPlaceholder"),
+      },
+    }),
+    [t]
+  );
+
+  const valueFormSchema = useMemo(
+    () =>
+      z.object({
+        value: z
+          .string()
+          .min(1, t("validation.required"))
+          .refine((val) => val.trim() !== "", t("validation.notEmpty"))
+          .refine((val) => !isNaN(Number(val)), t("validation.mustBeNumber"))
+          .refine(
+            (val) => Number.isInteger(Number(val)) || Number(val) % 1 === 0,
+            t("validation.mustBeInteger")
+          ),
+      }),
+    [t]
+  );
+
   const form = useForm<ValueFormData>({
     resolver: zodResolver(valueFormSchema),
     defaultValues: {
@@ -80,7 +89,7 @@ export const EditValueDialog = ({
       onClose();
       form.reset();
     } catch (error) {
-      console.error("Ошибка при обновлении значения:", error);
+      console.error("Error updating value:", error);
     }
   };
 
@@ -120,13 +129,13 @@ export const EditValueDialog = ({
 
           <DialogFooter>
             <Button type="button" variant="outline" onClick={handleClose}>
-              Отмена
+              {t("cancel")}
             </Button>
             <Button
               type="submit"
               disabled={form.formState.isSubmitting || !form.formState.isValid}
             >
-              {form.formState.isSubmitting ? "Сохранение..." : "Сохранить"}
+              {form.formState.isSubmitting ? t("saving") : t("save")}
             </Button>
           </DialogFooter>
         </form>

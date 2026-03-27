@@ -141,7 +141,7 @@ export default function PresentationThumb({
         key={presentation.id}
         to={`/editor/${presentation.id}`}
         className="bg-white dark:bg-neutral-900 rounded-xl border border-border shadow-sm cursor-pointer hover:bg-accent/50 transition-colors outline-none flex flex-col justify-stretch focus-visible:ring-2 focus-visible:ring-ring"
-        aria-label={`Open presentation: ${presentation.title}`}
+        aria-label={t("openPresentation", { title: presentation.title })}
       >
         <div
           className="aspect-video bg-accent flex items-center justify-center rounded-t-xl user-select-none overflow-hidden shrink-0 relative"
@@ -187,7 +187,7 @@ export default function PresentationThumb({
                   variant="ghost"
                   size="icon"
                   onClick={handleMoreClick}
-                  aria-label="More options"
+                  aria-label={t("moreOptions")}
                 >
                   <MoreHorizontal className="size-4" strokeWidth={1.5} />
                 </Button>
@@ -214,7 +214,7 @@ export default function PresentationThumb({
                       onClick={async () => {
                         setOpen(false);
                         await createPresentation({
-                          title: `${presentation.title} (копия)`,
+                          title: `${presentation.title} ${t("copySuffix")}`,
                           themeId: presentation.themeId,
                           slides: presentation.slides,
                         });

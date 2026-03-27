@@ -15,6 +15,7 @@ import { DEFAULT_CHART_COLORS } from "@/lib/constants/chart-palettes";
 import { useAtomValue } from "jotai";
 import { presentationAtom } from "@/lib/hooks/use-presentation";
 import { useTheme } from "@/lib/hooks/use-theme";
+import { useScopedI18n } from "@/lib/locales/client";
 
 const defaultData: Matrix = [
   [{ value: "Фрукты" }, { value: "Количество" }],
@@ -63,6 +64,7 @@ export const ChartEditor = ({
   const { theme } = useTheme(presentation?.themeId || null);
   const themeColors = theme?.colors?.chart || DEFAULT_CHART_COLORS;
   const [isLoading, setIsLoading] = useState(false);
+  const t = useScopedI18n("chartEditor");
 
   const addRow = useCallback(() => {
     setData((prevData) => {
@@ -128,7 +130,7 @@ export const ChartEditor = ({
         <div className="w-full flex-1 flex flex-col gap-4">
           <div className="relative pt-4">
             <Textarea
-              placeholder="Вставьте данные или опишите, что вы хотите построить"
+              placeholder={t("placeholder")}
               className="w-full"
               value={prompt}
               rows={4}
@@ -136,7 +138,7 @@ export const ChartEditor = ({
             />
 
             <WithTooltip
-              display="Сгенерировать график по описанию или данным"
+              display={t("generateTooltip")}
               trigger={
                 <Button
                   onClick={handleGenerateChart}
@@ -144,19 +146,19 @@ export const ChartEditor = ({
                   disabled={isLoading}
                 >
                   {isLoading && <Loader className="size-4 animate-spin" />}
-                  Сгенерировать
+                  {t("generate")}
                 </Button>
               }
             />
           </div>
 
-          <h3 className="text-lg font-semibold">Данные</h3>
+          <h3 className="text-lg font-semibold">{t("dataHeader")}</h3>
           <div className="flex gap-2">
             <div className="flex-1 flex flex-col gap-2">
               <Spreadsheet data={data} onChange={setData} />
               <div className="flex gap-2">
                 <WithTooltip
-                  display="Удалить строку"
+                  display={t("deleteRow")}
                   trigger={
                     <Button variant="outline" size="sm" onClick={deleteRow}>
                       <Minus strokeWidth={1.5} className="size-4" />
@@ -164,7 +166,7 @@ export const ChartEditor = ({
                   }
                 />
                 <WithTooltip
-                  display="Добавить строку"
+                  display={t("addRow")}
                   side="bottom"
                   trigger={
                     <Button
@@ -181,7 +183,7 @@ export const ChartEditor = ({
             </div>
             <div className="flex flex-col gap-2 h-full">
               <WithTooltip
-                display="Удалить столбец"
+                display={t("deleteColumn")}
                 trigger={
                   <Button variant="outline" size="sm" onClick={deleteColumn}>
                     <Minus strokeWidth={1.5} className="size-4" />
@@ -189,7 +191,7 @@ export const ChartEditor = ({
                 }
               />
               <WithTooltip
-                display="Добавить столбец"
+                display={t("addColumn")}
                 trigger={
                   <Button
                     variant="outline"
@@ -206,7 +208,7 @@ export const ChartEditor = ({
         </div>
 
         <div className="shrink-0 flex flex-col gap-4">
-          <h3 className="text-lg font-semibold">Предпросмотр</h3>
+          <h3 className="text-lg font-semibold">{t("preview")}</h3>
           <div className="w-full h-[20em]">
             <ChartPreview
               data={transformDataForChart(data)}
@@ -240,7 +242,7 @@ export const ChartEditor = ({
               onUpdate({ data, chartType, showLabels, showGrid, showValues, stacked, colors });
             }}
           >
-            Сохранить
+            {t("save")}
           </Button>
         </div>
       </div>

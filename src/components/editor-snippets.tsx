@@ -19,6 +19,7 @@ type GroupedCommands = Record<string, Command[]>;
 
 export function EditorSnippets() {
   const t = useScopedI18n("editor");
+  const tCmd = useScopedI18n("commands");
   const [openPopover, setOpenPopover] = useState<string | null>(null);
   const [currentSlideId] = useCurrentSlideIdAtom();
   const [presentationAtom] = usePresentationAtom();
@@ -152,7 +153,7 @@ export function EditorSnippets() {
                   >
                     <command.icon className="size-4" strokeWidth={1.5} />
                     <p className="text-xs font-normal w-full truncate">
-                      {command.title}
+                      {tCmd(command.id)}
                     </p>
                     <GripVertical
                       className="size-4 text-muted-foreground absolute top-2 right-2"

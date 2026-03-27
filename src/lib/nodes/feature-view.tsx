@@ -23,6 +23,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Node } from "prosemirror-model";
+import { useScopedI18n } from "@/lib/locales/client";
 
 export const FeatureView = ({
   node,
@@ -34,6 +35,7 @@ export const FeatureView = ({
   const attrs = node.attrs as FeatureAttributes;
   const [isFocused, setIsFocused] = useState(false);
   const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
+  const t = useScopedI18n("nodes");
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [title, setTitle] = useState(attrs.title);
   const [content, setContent] = useState(attrs.content);
@@ -187,26 +189,26 @@ export const FeatureView = ({
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Редактировать фичу</DialogTitle>
+            <DialogTitle>{t("editFeature")}</DialogTitle>
             <DialogDescription>
-              Измените заголовок и описание фичи
+              {t("editFeatureDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Заголовок</label>
+              <label className="text-sm font-medium">{t("titleLabel")}</label>
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Введите заголовок"
+                placeholder={t("titlePlaceholder")}
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Описание</label>
+              <label className="text-sm font-medium">{t("descriptionLabel")}</label>
               <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="Введите описание"
+                placeholder={t("descriptionPlaceholder")}
               />
             </div>
           </div>
@@ -215,9 +217,9 @@ export const FeatureView = ({
               variant="outline"
               onClick={() => setIsEditDialogOpen(false)}
             >
-              Отмена
+              {t("cancel")}
             </Button>
-            <Button onClick={handleSave}>Сохранить</Button>
+            <Button onClick={handleSave}>{t("save")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
