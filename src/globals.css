@@ -507,7 +507,6 @@ body {
 
 .slide [data-timeline-item] {
   width: 100%;
-  border-left: 1px solid var(--slide-card-foreground);
   text-wrap: pretty;
 }
 
@@ -532,8 +531,14 @@ body {
 .slide
   [data-type="timeline"][data-show-numbers="false"]
   [data-timeline-item-number]
-  > span {
+  > span:not([data-timeline-item-dot]) {
   @apply hidden;
+}
+
+.slide
+  [data-type="timeline"][data-show-numbers="false"]
+  [data-timeline-item-dot] {
+  @apply block;
 }
 
 .slide .node-timelineItem {

@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/popover";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useScopedI18n } from "@/lib/locales/client";
 
 export const TimelineItemView = ({
   node,
@@ -33,6 +34,7 @@ export const TimelineItemView = ({
   const attrs = node.attrs as TimelineItemAttributes;
   const [isFocused, setIsFocused] = useState(false);
   const hasFocus = useNodeHasFocus(editor, getPos, node.nodeSize);
+  const t = useScopedI18n("nodes");
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   const [title, setTitle] = useState(attrs.title);
   const [content, setContent] = useState(attrs.content);
@@ -135,21 +137,25 @@ export const TimelineItemView = ({
           >
             <div
               data-timeline-item-connector
-              className="absolute top-[0.8em] left-[0.8em] w-[4em] border-t"
+              className="absolute top-[1.2em] left-[1.2em] w-[4em] border-t"
               style={{
                 borderColor: "var(--slide-accent)",
               }}
             />
             <span
               data-timeline-item-number
-              className="relative font-bold tracking-wide leading-none !m-0 inline-flex items-center size-[2em] justify-center rounded-md -left-[1em] shrink-0 font-[family-name:var(--slide-font-family)]"
+              className="relative font-bold tracking-wide leading-none !m-0 inline-flex items-center size-[2.8em] justify-center rounded-full -left-[1em] shrink-0 font-[family-name:var(--slide-font-family)]"
               style={{
                 fontSize: "0.8em",
-                backgroundColor: "var(--slide-accent)",
+                background: `var(--slide-smart-layout-color-${itemIndex - 1}, var(--slide-accent))`,
                 color: "white",
               }}
             >
               <span>{itemIndex}</span>
+              <span
+                data-timeline-item-dot
+                className="absolute size-[1.2em] rounded-full bg-white hidden"
+              />
             </span>
             <div className="flex flex-col gap-0 pt-[0.2em] w-full">
               <h4 className="font-bold text-lg">{attrs.title}</h4>
@@ -169,26 +175,26 @@ export const TimelineItemView = ({
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Редактировать событие</DialogTitle>
+            <DialogTitle>{t("editTimelineItem")}</DialogTitle>
             <DialogDescription>
-              Измените заголовок и описание события
+              {t("editTimelineItemDescription")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Заголовок</label>
+              <label className="text-sm font-medium">{t("titleLabel")}</label>
               <Input
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Введите заголовок"
+                placeholder={t("titlePlaceholder")}
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Описание</label>
+              <label className="text-sm font-medium">{t("descriptionLabel")}</label>
               <Textarea
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
-                placeholder="Введите описание"
+                placeholder={t("descriptionPlaceholder")}
               />
             </div>
           </div>
@@ -197,9 +203,9 @@ export const TimelineItemView = ({
               variant="outline"
               onClick={() => setIsEditDialogOpen(false)}
             >
-              Отмена
+              {t("cancel")}
             </Button>
-            <Button onClick={handleSave}>Сохранить</Button>
+            <Button onClick={handleSave}>{t("save")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
