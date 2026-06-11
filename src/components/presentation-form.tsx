@@ -1,5 +1,6 @@
 
 import { apiFetch } from "@/api/client";
+import { sanitizeInlineHtml } from "@/lib/sanitize-html";
 import { Button } from "@/components/ui/button";
 import { SimpleTiptapEditor } from "@/components/ui/simple-tiptap-editor";
 import {
@@ -54,7 +55,7 @@ type PresentationFormProps = {
 const htmlToText = (html: string): string => {
   if (!html) return "";
   const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = html;
+  tempDiv.innerHTML = sanitizeInlineHtml(html);
   return tempDiv.textContent || tempDiv.innerText || "";
 };
 

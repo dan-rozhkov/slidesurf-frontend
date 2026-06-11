@@ -1,5 +1,6 @@
 
 import { cn } from "@/lib/utils";
+import { sanitizeInlineHtml } from "@/lib/sanitize-html";
 
 type EditableTextProps = {
   value: string;
@@ -17,7 +18,7 @@ export function EditableText({
       className={cn("outline-none cursor-text", className)}
       contentEditable
       suppressContentEditableWarning
-      dangerouslySetInnerHTML={{ __html: value }}
+      dangerouslySetInnerHTML={{ __html: sanitizeInlineHtml(value) }}
       onKeyDown={(e) => {
         if (e.key === "Enter") {
           e.preventDefault();
